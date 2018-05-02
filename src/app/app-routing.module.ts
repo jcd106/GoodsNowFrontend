@@ -5,8 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 // Components
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/error/not-found/not-found.component';
-import { LoginComponent } from './components/account/login/login.component';
-import { RegisterComponent } from './components/account/register/register.component';
+import { AccessAccountComponent } from './components/account/access-account/access-account.component';
 import { ProfileComponent } from './components/account/profile/profile.component';
 import { UpdateProfileComponent } from './components/account/update-profile/update-profile.component';
 import { ViewOwedComponent } from './components/admin/view-owed/view-owed.component';
@@ -23,8 +22,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: '404', component: NotFoundComponent},
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'access', component: AccessAccountComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'profile/update', component: UpdateProfileComponent },
   { path: 'view', redirectTo: '404', pathMatch: 'full' },

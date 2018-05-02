@@ -11,8 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 // components
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
-import { LoginComponent } from './components/account/login/login.component';
-import { RegisterComponent } from './components/account/register/register.component';
 import { ProfileComponent } from './components/account/profile/profile.component';
 import { UpdateProfileComponent } from './components/account/update-profile/update-profile.component';
 import { ViewOwedComponent } from './components/admin/view-owed/view-owed.component';
@@ -26,6 +24,7 @@ import { OrderHistoryComponent } from './components/customer/order-history/order
 import { ViewOrderComponent } from './components/customer/view-order/view-order.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/error/not-found/not-found.component';
+import { AccessAccountComponent } from './components/account/access-account/access-account.component';
 
 // services
 
@@ -35,8 +34,7 @@ import { NotFoundComponent } from './components/error/not-found/not-found.compon
     HomeComponent,
     NotFoundComponent,
     NavComponent,
-    LoginComponent,
-    RegisterComponent,
+    AccessAccountComponent,
     ProfileComponent,
     UpdateProfileComponent,
     ViewOwedComponent,
