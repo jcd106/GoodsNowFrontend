@@ -1,3 +1,44 @@
-<p>
-  nav works!
-</p>
+<header id="header" class="shadow-sm fixed-top">
+  <!-- user bar -->
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark userbar">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/access"><mat-icon class="icon">account_circle</mat-icon>My Account</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link"><mat-icon class="icon">input</mat-icon>Sign In</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"><mat-icon class="icon">input</mat-icon>Sign Out</a>
+      </li>
+    </ul>
+  </nav>
+  <!-- shopping bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" routerLink="/home">
+      <img src="assets/images/logo.png" height="40" alt="Revature"></a>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+        <li ngbDropdown  class="nav-item dropdown" >
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Shop
+          </a>
+          <div ngbDropdownMenu  class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Clothing</a>
+            <a class="dropdown-item" href="#">Electronics</a>
+            <a class="dropdown-item" href="#">Home</a>
+            <a class="dropdown-item" href="#">Beauty & Health</a>
+            <a class="dropdown-item" href="#">Outdoor</a>
+          </div>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link checkout-cart" routerLink="/access"><mat-icon class="icon">shopping_cart</mat-icon></a>
+        </li>
+        <div id="checkout-count"><b>100</b></div>
+      </ul>
+  </nav>
+</header>

@@ -1,9 +1,10 @@
 // modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatTableModule, MatPaginatorModule, MatSortModule, MatTabsModule } from '@angular/material';
+import { MatTableModule, MatPaginatorModule, MatSortModule, MatTabsModule, MatIconModule } from '@angular/material';
 import { MatGridListModule, MatFormFieldModule, MatInputModule, MatRadioModule } from '@angular/material';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -50,8 +51,10 @@ import { AccessAccountComponent } from './components/account/access-account/acce
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgbModule.forRoot(),
     MatTableModule,
     MatPaginatorModule,
+    MatIconModule,
     MatSortModule,
     MatTabsModule,
     MatGridListModule,
