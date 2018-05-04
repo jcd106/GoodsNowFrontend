@@ -1,20 +1,15 @@
 <button class="btn btn-default" (click)="goBack()">← Back</button><br><br>
-<form ngNativeValidate (ngSubmit)="upload()">
+<form ngNativeValidate (ngSubmit)="submitReimb()">
   <mat-form-field>
-    <input matInput class="form-container" id="product-name" placeholder="Product Name" required>
+    <input matInput class="form-container" id="product-name" placeholder="Product Name">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <textarea matInput id="product-desc" placeholder="Description"></textarea>
   </mat-form-field>
   <mat-form-field>
-    <textarea matInput id="product-desc" placeholder="Description" required></textarea>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Amount" type="number" class="example-right-align" step="0.01" required>
+    <input matInput placeholder="Amount" type="number" class="example-right-align" step="0.01">
     <span matPrefix>$&nbsp;</span>
   </mat-form-field>
-  <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*;capture=camera" required>
-  <br><br>
-  <div *ngIf="!imageIsValid" class="alert alert-danger" id="formError">
-    Invalid file type!
-  </div>
-  <br><br>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
