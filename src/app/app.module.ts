@@ -1,10 +1,12 @@
 // modules
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatTableModule, MatPaginatorModule, MatSortModule, MatTabsModule, MatIconModule } from '@angular/material';
 import { MatGridListModule, MatFormFieldModule, MatInputModule, MatRadioModule } from '@angular/material';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { FileUploadModule } from 'ng2-file-upload';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Routing
@@ -54,6 +56,7 @@ import { ProductsService } from './services/products.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     NgbModule.forRoot(),
@@ -66,7 +69,8 @@ import { ProductsService } from './services/products.service';
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
-    Ng2CloudinaryModule
+    Ng2CloudinaryModule,
+    FileUploadModule
   ],
   providers: [
     ProductsService
