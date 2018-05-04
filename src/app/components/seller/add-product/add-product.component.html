@@ -1,0 +1,15 @@
+<button class="btn btn-default" (click)="goBack()">← Back</button><br><br>
+<form ngNativeValidate (ngSubmit)="submitReimb()">
+  <mat-form-field>
+    <input matInput class="form-container" id="product-name" placeholder="Product Name">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <textarea matInput id="product-desc" placeholder="Description"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Amount" type="number" class="example-right-align" step="0.01">
+    <span matPrefix>$&nbsp;</span>
+  </mat-form-field>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -17,6 +17,7 @@ import { ManageProductsComponent } from './components/seller/manage-products/man
 import { BrowseProductsComponent } from './components/user/browse-products/browse-products.component';
 import { CartComponent } from './components/user/cart/cart.component';
 import { CheckoutComponent } from './components/user/checkout/checkout.component';
+import { AddProductComponent } from './components/seller/add-product/add-product.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -34,6 +35,7 @@ export const routes: Routes = [
   { path: 'view/store/order', redirectTo: '404', pathMatch: 'full'},
   { path: 'view/store/order/:id', component: FullfillOrderComponent},
   { path: 'products', component: ManageProductsComponent},
+  { path: 'products/add', component: AddProductComponent},
   { path: 'browse', component: BrowseProductsComponent},
   { path: 'cart', component: CartComponent},
   { path: 'checkout', component: CheckoutComponent},

@@ -26,17 +26,17 @@
           Shop
           </a>
           <div ngbDropdownMenu  class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Clothing</a>
-            <a class="dropdown-item" href="#">Electronics</a>
-            <a class="dropdown-item" href="#">Home</a>
-            <a class="dropdown-item" href="#">Beauty & Health</a>
-            <a class="dropdown-item" href="#">Outdoor</a>
+            <a class="dropdown-item" (click)="navCategory('clothing')">Clothing</a>
+            <a class="dropdown-item" (click)="navCategory('electronics')">Electronics</a>
+            <a class="dropdown-item" (click)="navCategory('home')">Home</a>
+            <a class="dropdown-item" (click)="navCategory('beautyhealth')">Beauty & Health</a>
+            <a class="dropdown-item" (click)="navCategory('outdoor')">Outdoor</a>
           </div>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a class="nav-link checkout-cart" routerLink="/access"><mat-icon class="icon">shopping_cart</mat-icon></a>
+            <a class="nav-link checkout-cart" routerLink="/cart"><mat-icon class="icon">shopping_cart</mat-icon></a>
         </li>
         <div id="checkout-count"><b>100</b></div>
       </ul>
