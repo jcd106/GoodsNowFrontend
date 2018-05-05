@@ -1,0 +1,33 @@
+
+.login-register{
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    /*other option*?
+    /* 
+    padding-left: 5%;
+    padding-right: 5%;
+
+    padding-bottom: 5%;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    */
+}
+.form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top:  10%;
+  }
+.full-width {
+    width: 100%;  
+  }

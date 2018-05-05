@@ -1,11 +1,14 @@
 // modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatTableModule, MatPaginatorModule, MatSortModule, MatTabsModule, MatIconModule } from '@angular/material';
-import { MatGridListModule, MatFormFieldModule, MatInputModule, MatRadioModule } from '@angular/material';
+import { MatGridListModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatFormField} from '@angular/material';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSelectModule} from '@angular/material/select';
+
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -66,7 +69,10 @@ import { ProductsService } from './services/products.service';
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
-    Ng2CloudinaryModule
+    Ng2CloudinaryModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [
     ProductsService
