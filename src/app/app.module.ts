@@ -72,17 +72,14 @@ import { ProductsService } from './services/products.service';
     MatInputModule,
     MatRadioModule,
     Ng2CloudinaryModule,
-<<<<<<< HEAD
+
     FileUploadModule,
     ReactiveFormsModule,
-    MatSelectModule
-=======
+    MatSelectModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MatSelectModule
     MatSelectModule,
     FileUploadModule
->>>>>>> Michael
   ],
   providers: [
     ProductsService
