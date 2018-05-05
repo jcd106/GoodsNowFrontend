@@ -4,8 +4,9 @@
 }
 
 .browse-layout{
-    width: 80%;
+    width: 90%;
     margin: auto;
+    padding: 5%;
 }
 
 .preview-image{
@@ -20,7 +21,7 @@
 }
 
 .products-row{
-    margin-left: 2em;
+    margin-left: 1em;
 }
 
 .catLink{
