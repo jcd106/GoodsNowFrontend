@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class ProductsService {
-  category: String = '';
+  category: BehaviorSubject<String> = new BehaviorSubject<String>('');
 
   constructor() { }
 
-  setCategory(cat: string) {
-    this.category = cat;
+  setCategory(cat: String) {
+    this.category.next(cat);
   }
 
   getCategory() {
