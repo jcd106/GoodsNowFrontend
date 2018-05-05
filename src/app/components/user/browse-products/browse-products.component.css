@@ -1,0 +1,32 @@
+.browse-card{
+    border: 1px solid #E5E5E5;
+    background-color: rgba(248, 247, 247, 0.527);
+}
+
+.browse-layout{
+    width: 80%;
+    margin: auto;
+}
+
+.preview-image{
+    margin: 0.5em;
+    padding: 0.25em;
+    border: 1px solid #E5E5E5;
+}
+
+.product-card{
+    margin: 0em 0.25em 0.25em 0.25em;
+    width: 48.25%;
+}
+
+.products-row{
+    margin-left: 2em;
+}
+
+.catLink{
+    color: rgb(116, 115, 115);
+}
+.catLink:hover{
+    color: rgb(125, 168, 59);
+    background-color: rgba(241, 241, 241, 0.534);
+}
