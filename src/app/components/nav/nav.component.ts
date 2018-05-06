@@ -19,4 +19,7 @@ export class NavComponent implements OnInit {
     this.router.navigate(['/browse']);
   }
 
+  logout() {
+    localStorage.clear();
+  }
 }

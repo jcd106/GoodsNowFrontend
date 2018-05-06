@@ -1,6 +1,8 @@
 // modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatTableModule, MatPaginatorModule, MatSortModule, MatTabsModule, MatIconModule } from '@angular/material';
 import { MatGridListModule, MatFormFieldModule, MatInputModule, MatRadioModule, MatFormField} from '@angular/material';
@@ -35,6 +37,7 @@ import { AddProductComponent } from './components/seller/add-product/add-product
 
 // services
 import { ProductsService } from './services/products.service';
+import { AccountsService } from './services/accounts.service';
 
 @NgModule({
   declarations: [
@@ -79,10 +82,12 @@ import { ProductsService } from './services/products.service';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    FileUploadModule
+    FileUploadModule,
+    HttpClientModule
   ],
   providers: [
-    ProductsService
+    ProductsService,
+    AccountsService
   ],
   bootstrap: [AppComponent]
 })

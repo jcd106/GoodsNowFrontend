@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTabsModule} from '@angular/material/tabs';
 import {FormControl, Validators, ValidatorFn, ValidationErrors} from '@angular/forms';
+import { Account } from '../../../models/account';
+import { AccountsService } from '../../../services/accounts.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,7 +11,13 @@ import {FormControl, Validators, ValidatorFn, ValidationErrors} from '@angular/f
   templateUrl: './access-account.component.html',
   styleUrls: ['./access-account.component.css']
 })
+
 export class AccessAccountComponent implements OnInit {
+
+  acc: Account = new Account();
+  loggedAcc = localStorage.getItem('account'); // used to check if already loggedin
+  invalid: boolean = true;
+
   // account fields for customer seller and admin
   email = new FormControl('', [Validators.required, Validators.email]);
   username = new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(16)]);
@@ -37,14 +46,29 @@ export class AccessAccountComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(private accService: AccountsService, private router: Router) { }
 
 
   ngOnInit() {
+    if(this.loggedAcc != null){
+      this.accService.subscribers.next(JSON.parse(localStorage.getItem('account')));
+      this.router.navigate(['home']);
+    }
   }
 
   login() {
     console.log('Attempting to log in');
+    this.populateAcc();
+    this.accService.accountLogin(this.acc).subscribe(accs => {
+      if(accs == null){
+        this.invalid = false;
+      } else {
+        this.accService.subscribers.next(accs);
+        localStorage.setItem('account', JSON.stringify(accs));
+        console.log(localStorage.getItem('account'));
+        this.router.navigate(['profile']);
+      }
+    })
   }
 
   customerSignUp() {
@@ -55,6 +79,12 @@ export class AccessAccountComponent implements OnInit {
     console.log('Attempting to sign up seller');
   }
 
+  populateAcc() {
+    this.acc.accountId =0;
+    this.acc.username = this.username.value;
+    this.acc.password = this.password.value;
+    this.acc.roleId =0;
+  }
 
   /*Error methods to display error messages for invalid input some other input validation is done in the
     html like the password match validation which works in junction with the passwordMatch Method
