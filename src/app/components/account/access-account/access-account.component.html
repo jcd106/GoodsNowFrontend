@@ -15,6 +15,7 @@
               <mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
             </mat-form-field>
           <br>
+          <p *ngIf="invalid" style="color: red;">invalid username or password </p>
           <br>
           <button class="btn btn-light" mat-button (click)="login()">Login</button>
         </form>
@@ -55,6 +56,7 @@
           <br>
           <br>
           <p *ngIf="!passwordMatch()" style="color: red;"> Password Mismatch </p>
+          <p *ngIf="notUnique" style="color: red;">username or email already exist </p>
           <button class="btn btn-light" mat-button (click)="customerSignUp()">Sign Up</button>
         </form>
       </mat-tab>

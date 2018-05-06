@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {MatTabsModule} from '@angular/material/tabs';
-import {FormControl, Validators, ValidatorFn, ValidationErrors} from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
+import { FormControl, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Account } from '../../../models/account';
 import { AccountsService } from '../../../services/accounts.service';
 import { Router } from '@angular/router';
+import { Seller } from '../../../models/seller';
+import { Customer } from '../../../models/customer';
 
 
 @Component({
@@ -16,7 +18,8 @@ export class AccessAccountComponent implements OnInit {
 
   acc: Account = new Account();
   loggedAcc = localStorage.getItem('account'); // used to check if already loggedin
-  invalid: boolean = true;
+  invalid: boolean = false;
+  notUnique: boolean = false;
 
   // account fields for customer seller and admin
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -50,40 +53,100 @@ export class AccessAccountComponent implements OnInit {
 
 
   ngOnInit() {
-    if(this.loggedAcc != null){
-      this.accService.subscribers.next(JSON.parse(localStorage.getItem('account')));
-      this.router.navigate(['home']);
+    if (this.loggedAcc != null) {
+      this.accService.account.next(JSON.parse(localStorage.getItem('account')));
+      this.router.navigate(['profile']);
     }
   }
 
   login() {
     console.log('Attempting to log in');
-    this.populateAcc();
-    this.accService.accountLogin(this.acc).subscribe(accs => {
-      if(accs == null){
-        this.invalid = false;
-      } else {
-        this.accService.subscribers.next(accs);
-        localStorage.setItem('account', JSON.stringify(accs));
-        console.log(localStorage.getItem('account'));
-        this.router.navigate(['profile']);
-      }
-    })
+    this.acc.accountId = 0;
+    this.acc.roleId = 0;
+    this.acc.username = this.username.value;
+    this.acc.password = this.password.value;
+
+    if (this.username.valid && this.password.valid) { //valid formats 
+      this.accService.accountLogin(this.acc).subscribe(accs => {
+        console.log(accs);
+        if (accs == null) {
+          this.invalid = true;
+          console.log('invalid username or password');
+        } else {
+          this.accService.account.next(accs);
+          localStorage.setItem('account', JSON.stringify(accs));
+          console.log(localStorage.getItem('account'));
+          this.router.navigate(['profile']);
+        }
+      })
+    }
   }
 
   customerSignUp() {
+    this.acc.accountId = 0;
+    this.acc.roleId = 1;
+    this.acc.username = this.username.value;
+    this.acc.password = this.password.value;
+    let customer: Customer = new Customer();
+
+    customer.account = this.acc;
+    customer.customerId = 0;
+    customer.email = this.email.value;
+    customer.firstName = this.firstName.value;
+    customer.lastName = this.lastName.value;
+
     console.log('Attempting to sign up customer');
+    if(this.username.valid && this.password.valid && this.email.valid && this.firstName.valid && this.lastName.valid && this.passwordMatch()){
+      this.accService.customerSignUp(this.acc, customer).subscribe(cus => {
+        if (cus == null) {
+          this.notUnique = true;
+          console.log('username or email already exist');
+        } else {
+          this.accService.customer.next(cus);
+          localStorage.setItem('customer', JSON.stringify(cus));
+          localStorage.setItem('account', JSON.stringify(cus.account));
+          console.log(localStorage.getItem('customer'));
+          this.router.navigate(['profile']);
+        }
+      })
+    }
+
+
   }
 
   sellerSignUp() {
-    console.log('Attempting to sign up seller');
-  }
-
-  populateAcc() {
-    this.acc.accountId =0;
+    this.acc.accountId =0; // just has to be initialized can be any value
     this.acc.username = this.username.value;
     this.acc.password = this.password.value;
-    this.acc.roleId =0;
+    this.acc.roleId = 2; // seller role id is 2
+    let seller: Seller = new Seller();
+    seller.account = this.acc;
+    seller.address = this.streetAddress.value;
+    seller.city = this.city.value;
+    seller.email = this.email.value;
+    seller.items = [];
+    seller.name = this.sellerName.value;
+    seller.sellerId = 0;
+    seller.state = this.state.value;
+    seller.zipcode = this.zipCode.value;
+
+    console.log('Attempting to sign up seller');
+    if(this.username.valid && this.password.valid && this.email.valid && this.sellerName.valid && this.streetAddress.valid && this.city.valid && this.state.valid && this.zipCode.valid && this.passwordMatch()){
+      this.accService.sellerSignUp(this.acc, seller).subscribe(sel => {
+        if (sel == null) {
+          this.notUnique = true;
+          console.log('username or email already exist');
+        } else {
+          this.accService.customer.next(sel);
+          localStorage.setItem('seller', JSON.stringify(sel));
+          localStorage.setItem('account', JSON.stringify(sel.account));
+          console.log(localStorage.getItem('customer'));
+          this.router.navigate(['profile']);
+        }
+      })
+    }
+
+    console.log('Attempting to sign up seller');
   }
 
   /*Error methods to display error messages for invalid input some other input validation is done in the
@@ -97,22 +160,22 @@ export class AccessAccountComponent implements OnInit {
 
   getEmailErrorMessage() {
     return this.email.hasError('required') ? 'You must enter a value' :
-        this.email.hasError('email') ? 'Not a valid email' :
-            '';
+      this.email.hasError('email') ? 'Not a valid email' :
+        '';
   }
 
   getUsernameErrorMessage() {
     return this.username.hasError('required') ? 'You must enter a value' :
-        this.username.hasError('minlength') ? 'Must have at least 5 characters' :
+      this.username.hasError('minlength') ? 'Must have at least 5 characters' :
         this.username.hasError('maxlength') ? 'Maximum 16 of characters' :
-            '';
+          '';
   }
 
   getPasswordErrorMessage() {
     return this.password.hasError('required') ? 'You must enter a value' :
-        this.password.hasError('minlength') ? 'Must have at least 8 characters' :
+      this.password.hasError('minlength') ? 'Must have at least 8 characters' :
         this.password.hasError('maxlength') ? 'Maximum 25 of characters' :
-            '';
+          '';
   }
 
   getPasswordConfirmErrorMessage() {
@@ -120,50 +183,50 @@ export class AccessAccountComponent implements OnInit {
       this.passwordConfirm.validator = null;
     }
     return this.passwordConfirm.hasError('required') ? 'You must enter a value' :
-        (this.password.value !== this.passwordConfirm.value) ? 'Password doesnt match' :
-            '';
+      (this.password.value !== this.passwordConfirm.value) ? 'Password doesnt match' :
+        '';
   }
 
   getFirstNameErrorMessage() {
     return this.firstName.hasError('required') ? 'You must enter a value' :
-        this.firstName.hasError('minlength') ? 'Must have at least 2 characters' :
+      this.firstName.hasError('minlength') ? 'Must have at least 2 characters' :
         this.firstName.hasError('maxlength') ? 'Maximum 50 of characters' :
-            '';
+          '';
   }
 
   getLastNameErrorMessage() {
     return this.lastName.hasError('required') ? 'You must enter a value' :
-        this.lastName.hasError('minlength') ? 'Must have at least 2 characters' :
+      this.lastName.hasError('minlength') ? 'Must have at least 2 characters' :
         this.lastName.hasError('maxlength') ? 'Maximum 50 of characters' :
-            '';
+          '';
   }
 
   getSellerNameErrorMessage() {
     return this.sellerName.hasError('required') ? 'You must enter a value' :
-        this.sellerName.hasError('minlength') ? 'Must have at least 2 characters' :
+      this.sellerName.hasError('minlength') ? 'Must have at least 2 characters' :
         this.sellerName.hasError('maxlength') ? 'Maximum 50 of characters' :
-            '';
+          '';
   }
 
   getStreetAddressErrorMessage() {
     return this.streetAddress.hasError('required') ? 'You must enter a value' :
-        this.streetAddress.hasError('minlength') ? 'Enter valid address' :
-            '';
+      this.streetAddress.hasError('minlength') ? 'Enter valid address' :
+        '';
   }
 
   getCityErrorMessage() {
     return this.city.hasError('required') ? 'You must enter a value' :
-        this.city.hasError('minlength') ? 'Not a city' :
+      this.city.hasError('minlength') ? 'Not a city' :
         this.city.hasError('maxlength') ? 'Not a City' :
-            '';
+          '';
   }
 
   getZipCodeErrorMessage() {
     return this.zipCode.hasError('required') ? 'You must enter a value' :
-        this.city.hasError('minlength') ? 'Must be a 5 digit zip code' :
+      this.city.hasError('minlength') ? 'Must be a 5 digit zip code' :
         this.city.hasError('maxlength') ? 'Must be a 5 digit zip code' :
-        this.city.hasError('pattern') ? 'Must be a number' :
-          '';
+          this.city.hasError('pattern') ? 'Must be a number' :
+            '';
   }
 
 }
