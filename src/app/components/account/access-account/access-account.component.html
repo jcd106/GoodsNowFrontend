@@ -70,27 +70,17 @@
           </mat-form-field>
           <br>
           <mat-form-field class="full-width">
+            <input matInput placeholder="Enter your email" [formControl]="email" required>
+            <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="full-width">
             <input matInput type="password" placeholder="Password" [formControl]="password" required>
             <mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
           </mat-form-field>
           <br>
           <mat-form-field class="full-width">
             <input matInput type="password" placeholder="Confirm Password" [formControl]="passwordConfirm" required>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Enter your email" [formControl]="email" required>
-            <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="First Name" [formControl]='firstName' required>
-            <mat-error *ngIf="firstName.invalid">{{ getFirstNameErrorMessage() }}</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Last Name" [formControl]='lastName' required>
-            <mat-error *ngIf="lastName.invalid">{{ getLastNameErrorMessage() }}</mat-error>
           </mat-form-field>
           <br>
           <mat-form-field class="full-width">
