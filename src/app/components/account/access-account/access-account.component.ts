@@ -48,18 +48,7 @@ export class AccessAccountComponent implements OnInit {
   state = new FormControl('', [Validators.required]);
   zipCode = new FormControl('', [Validators.required, Validators.maxLength(5), Validators.minLength(5), Validators.pattern('^[0-9]*$')]);
 
-
-
-  constructor(private accService: AccountsService, private router: Router, private prod: ProductsService) {
-    prod.getItemsByZipSellerId('70').subscribe(items => {
-      if (items == null) {
-        console.log('failed to give ');
-      } else {
-        console.log(items);
-      }
-    });
-  }
-
+  constructor(private accService: AccountsService, private router: Router) {}
 
   ngOnInit() {
     if (localStorage.getItem('customer') != null && localStorage.getItem('seller') != null && localStorage.getItem('admin') != null) {
