@@ -3,6 +3,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FormControl, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { Account } from '../../../models/account';
 import { AccountsService } from '../../../services/accounts.service';
+import { ProductsService } from '../../../services/products.service';
 import { Router } from '@angular/router';
 import { Seller } from '../../../models/seller';
 import { Customer } from '../../../models/customer';
@@ -18,8 +19,8 @@ export class AccessAccountComponent implements OnInit {
 
   acc: Account = new Account();
   loggedAcc = localStorage.getItem('account'); // used to check if already loggedin
-  invalid: boolean = false;
-  notUnique: boolean = false;
+  invalid = false;
+  notUnique = false;
 
   // account fields for customer seller and admin
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -66,7 +67,7 @@ export class AccessAccountComponent implements OnInit {
     this.acc.username = this.username.value;
     this.acc.password = this.password.value;
 
-    if (this.username.valid && this.password.valid) { //valid formats 
+    if (this.username.valid && this.password.valid) { // valid formats
       this.accService.accountLogin(this.acc).subscribe(accs => {
         console.log(accs);
         if (accs == null) {
@@ -78,7 +79,7 @@ export class AccessAccountComponent implements OnInit {
           console.log(localStorage.getItem('account'));
           this.router.navigate(['profile']);
         }
-      })
+      });
     }
   }
 
@@ -87,7 +88,7 @@ export class AccessAccountComponent implements OnInit {
     this.acc.roleId = 1;
     this.acc.username = this.username.value;
     this.acc.password = this.password.value;
-    let customer: Customer = new Customer();
+    const customer: Customer = new Customer();
 
     customer.account = this.acc;
     customer.customerId = 0;
@@ -96,7 +97,8 @@ export class AccessAccountComponent implements OnInit {
     customer.lastName = this.lastName.value;
 
     console.log('Attempting to sign up customer');
-    if(this.username.valid && this.password.valid && this.email.valid && this.firstName.valid && this.lastName.valid && this.passwordMatch()){
+    if ( this.username.valid && this.password.valid && this.email.valid && this.firstName.valid && this.lastName.valid
+      && this.passwordMatch() ) {
       this.accService.customerSignUp(this.acc, customer).subscribe(cus => {
         if (cus == null) {
           this.notUnique = true;
@@ -108,18 +110,19 @@ export class AccessAccountComponent implements OnInit {
           console.log(localStorage.getItem('customer'));
           this.router.navigate(['profile']);
         }
-      })
+      });
+
     }
 
 
   }
 
   sellerSignUp() {
-    this.acc.accountId =0; // just has to be initialized can be any value
+    this.acc.accountId = 0; // just has to be initialized can be any value
     this.acc.username = this.username.value;
     this.acc.password = this.password.value;
     this.acc.roleId = 2; // seller role id is 2
-    let seller: Seller = new Seller();
+    const seller: Seller = new Seller();
     seller.account = this.acc;
     seller.address = this.streetAddress.value;
     seller.city = this.city.value;
@@ -131,19 +134,20 @@ export class AccessAccountComponent implements OnInit {
     seller.zipcode = this.zipCode.value;
 
     console.log('Attempting to sign up seller');
-    if(this.username.valid && this.password.valid && this.email.valid && this.sellerName.valid && this.streetAddress.valid && this.city.valid && this.state.valid && this.zipCode.valid && this.passwordMatch()){
+    if (this.username.valid && this.password.valid && this.email.valid && this.sellerName.valid
+      && this.streetAddress.valid && this.city.valid && this.state.valid && this.zipCode.valid && this.passwordMatch()) {
       this.accService.sellerSignUp(this.acc, seller).subscribe(sel => {
         if (sel == null) {
           this.notUnique = true;
           console.log('username or email already exist');
         } else {
-          this.accService.customer.next(sel);
+          this.accService.seller.next(sel);
           localStorage.setItem('seller', JSON.stringify(sel));
           localStorage.setItem('account', JSON.stringify(sel.account));
           console.log(localStorage.getItem('customer'));
           this.router.navigate(['profile']);
         }
-      })
+      });
     }
 
     console.log('Attempting to sign up seller');
