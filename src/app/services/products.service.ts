@@ -34,15 +34,15 @@ export class ProductsService {
   }
 
   getItemsByCity(city: String) {
-    return this.http.get<Item[]>(environment.backEndApiUrl + 'items/category=' + city,  HTTP_OPTIONS);
+    return this.http.get<Item[]>(environment.backEndApiUrl + 'items/city=' + city,  HTTP_OPTIONS);
   }
 
   getItemsByZipCode(zipcode: String) {
     return this.http.get<Item[]>(environment.backEndApiUrl + 'items/zipcode=' + zipcode,  HTTP_OPTIONS);
   }
 
-  getItemsByZipSellerId(id: String) {
-    return this.http.get<Item[]>(environment.backEndApiUrl + 'items/sellerid=' + id,  HTTP_OPTIONS);
+  getItemsByZipSellerId(id) {
+    return this.http.get<Item[]>(environment.backEndApiUrl + 'items/sellerId=' + id,  HTTP_OPTIONS);
   }
 
 }

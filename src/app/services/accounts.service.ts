@@ -15,20 +15,24 @@ const HTTP_OPTIONS = {
 
 @Injectable()
 export class AccountsService {
-  account: BehaviorSubject<Account> = new BehaviorSubject<Account>(null);
+
   customer: BehaviorSubject<Customer> = new BehaviorSubject<Customer>(null);
   seller: BehaviorSubject<Seller> = new BehaviorSubject<Seller>(null);
   loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>((localStorage.getItem('user') !== null) ? true : false);
+  admin: BehaviorSubject<Seller> = new BehaviorSubject<Seller>(null);
 
   constructor(private http: HttpClient) {
-    const acc = localStorage.getItem('account');
-    if (acc !== '{}' && acc !== 'undefined') { this.account.next(JSON.parse( acc )); }
+
     const cus = localStorage.getItem('customer');
-    if (cus !== '{}' && acc !== 'undefined') { this.customer.next(JSON.parse( cus )); }
+    if (cus !== '{}' && cus !== 'undefined') { this.customer.next(JSON.parse( cus )); }
+    const sel = localStorage.getItem('seller');
+    if (sel !== '{}' && sel !== 'undefined') { this.seller.next(JSON.parse( sel )); }
+    const ad = localStorage.getItem('admin');
+    if (ad !== '{}' && ad !== 'undefined') { this.seller.next(JSON.parse( ad )); }
   }
 
   public accountLogin(acc: Account) {
-    return this.http.post<Account>(environment.backEndApiUrl + 'login', JSON.stringify(acc), HTTP_OPTIONS);
+    return this.http.post<JSON>(environment.backEndApiUrl + 'login', JSON.stringify(acc), HTTP_OPTIONS);
   }
 
   public customerSignUp(Account: Account, Customer: Customer) {

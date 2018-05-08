@@ -26,7 +26,7 @@ export class AddProductComponent implements OnInit {
     this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
       const res: any = JSON.parse(response);
       this.imageId = res.public_id;
-      addProduct();
+      this.addProduct();
       return { item, response, status, headers };
     };
     // Override onErrorItem to be alerted to error
@@ -47,7 +47,7 @@ export class AddProductComponent implements OnInit {
     this.uploader.uploadAll();
   }
 
-  addProduct(){
+  addProduct() {
     this.item.seller = this.seller;
     this.item.image = this.imageId;
     this.prodService.addItem(this.item).subscribe(item => {
