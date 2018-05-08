@@ -1,122 +1,133 @@
-<div class="card login-register">
-  <mat-tab-group>
-    <div class="">
-      <!--Login Tab-->
-      <mat-tab label="Login">
-        <br>
-        <form class="form formControl">
-          <mat-form-field class="full-width">
+<mat-card>
+  <div class="card login-register">
+    <mat-tab-group>
+      <div>
+        <!--Login Tab-->
+        <mat-tab label="Login">
+          <br>
+          <div *ngIf="loading" class="login-register">
+            <mat-spinner layout-align="center center"></mat-spinner>  
+          </div>
+          <form *ngIf="!loading" class="form formControl">
+            <mat-form-field class="full-width">
               <input matInput placeholder="Username" [formControl]="username" required>
               <mat-error *ngIf="username.invalid">{{ getUsernameErrorMessage() }}</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
               <input matInput type="password" placeholder="Password" [formControl]="password" required>
               <mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
             </mat-form-field>
-          <br>
-          <p *ngIf="invalid" style="color: red;">invalid username or password </p>
-          <br>
-          <button class="btn btn-light" mat-button (click)="login()">Login</button>
-        </form>
-      </mat-tab>
-      <br>
+            <br>
+            <p *ngIf="invalid" style="color: red;">invalid username or password </p>
+            <br>
+            <button *ngIf="!loading" class="btn btn-light" mat-button (click)="login()">Login</button>
+          </form>
+        </mat-tab>
+        <br>
 
-      <!--Customer Registration Tab-->
-      <mat-tab label="Customer Sign Up">
-        <form class="form formControl">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Username" [formControl]="username" required>
-            <mat-error *ngIf="username.invalid">{{ getUsernameErrorMessage() }}</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Enter your email" [formControl]="email" required>
-            <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput type="password" placeholder="Password" [formControl]="password" required>
-            <mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput type="password" placeholder="Confirm Password" [formControl]="passwordConfirm" required>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="First Name" [formControl]='firstName' required>
-            <mat-error *ngIf="firstName.invalid">{{ getFirstNameErrorMessage() }}</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Last Name" [formControl]='lastName' required>
-            <mat-error *ngIf="lastName.invalid">{{ getLastNameErrorMessage() }}</mat-error>
-          </mat-form-field>
-          <br>
-          <br>
-          <p *ngIf="!passwordMatch()" style="color: red;"> Password Mismatch </p>
-          <p *ngIf="notUnique" style="color: red;">username or email already exist </p>
-          <button class="btn btn-light" mat-button (click)="customerSignUp()">Sign Up</button>
-        </form>
-      </mat-tab>
+        <!--Customer Registration Tab-->
+        <mat-tab label="Customer Sign Up">
+          <div *ngIf="loading" class="login-register">
+            <mat-spinner layout-align="center center"></mat-spinner>  
+          </div>
+          <form *ngIf="!loading" class="form formControl">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Username" [formControl]="username" required>
+              <mat-error *ngIf="username.invalid">{{ getUsernameErrorMessage() }}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Enter your email" [formControl]="email" required>
+              <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+              <input matInput type="password" placeholder="Password" [formControl]="password" required>
+              <mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+              <input matInput type="password" placeholder="Confirm Password" [formControl]="passwordConfirm" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="First Name" [formControl]='firstName' required>
+              <mat-error *ngIf="firstName.invalid">{{ getFirstNameErrorMessage() }}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Last Name" [formControl]='lastName' required>
+              <mat-error *ngIf="lastName.invalid">{{ getLastNameErrorMessage() }}</mat-error>
+            </mat-form-field>
+            <br>
+            <br>
+            <p *ngIf="!passwordMatch()" style="color: red;"> Password Mismatch </p>
+            <p *ngIf="notUnique" style="color: red;">username or email already exist </p>
+            <button *ngIf="!loading" class="btn btn-light" mat-button (click)="customerSignUp()">Sign Up</button>
+          </form>
+        </mat-tab>
 
-      <!--Seller Registration Tab-->
-      <mat-tab label="Seller Sign Up">
-        <form class="form formControl">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Username" [formControl]="username" required>
-            <mat-error *ngIf="username.invalid">{{ getUsernameErrorMessage() }}</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Enter your email" [formControl]="email" required>
-            <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput type="password" placeholder="Password" [formControl]="password" required>
-            <mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput type="password" placeholder="Confirm Password" [formControl]="passwordConfirm" required>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Seller Name" [formControl]='sellerName' required>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Street Address" [formControl]="streetAddress" required>
-            <mat-error *ngIf="streetAddress.invalid">{{ getStreetAddressErrorMessage() }}</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="City" [formControl]='city' required>
-            <mat-error *ngIf="city.invalid">{{ getCityErrorMessage() }}</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <mat-select placeholder="State" [formControl]="state" required>
-              <mat-option>--</mat-option>
-              <mat-option *ngFor="let usState of usStates" [value]="usState">
-                {{ usState }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="state.hasError('required')">Please select a state</mat-error>
-          </mat-form-field>
-          <br>
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Zip Code" [formControl]='zipCode' required>
-            <mat-error *ngIf="zipCode.invalid">{{ getZipCodeErrorMessage() }}</mat-error>
-          </mat-form-field>
-          <br>
-          <br>
-          <p *ngIf="!passwordMatch()" style="color: red;"> Password Mismatch </p>
-          <button class="btn btn-light" mat-button (click)="sellerSignUp()">Sign Up</button>
-        </form>
-      </mat-tab>
-    </div>
-  </mat-tab-group>
-</div>
+        <!--Seller Registration Tab-->
+        <mat-tab label="Seller Sign Up">
+          <div *ngIf="loading" class="login-register">
+            <mat-spinner layout-align="center center"></mat-spinner>  
+          </div>
+          <form *ngIf="!loading" class="form formControl">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Username" [formControl]="username" required>
+              <mat-error *ngIf="username.invalid">{{ getUsernameErrorMessage() }}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Enter your email" [formControl]="email" required>
+              <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+              <input matInput type="password" placeholder="Password" [formControl]="password" required>
+              <mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+              <input matInput type="password" placeholder="Confirm Password" [formControl]="passwordConfirm" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Seller Name" [formControl]='sellerName' required>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Street Address" [formControl]="streetAddress" required>
+              <mat-error *ngIf="streetAddress.invalid">{{ getStreetAddressErrorMessage() }}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="City" [formControl]='city' required>
+              <mat-error *ngIf="city.invalid">{{ getCityErrorMessage() }}</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+              <mat-select placeholder="State" [formControl]="state" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let usState of usStates" [value]="usState">
+                  {{ usState }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="state.hasError('required')">Please select a state</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Zip Code" [formControl]='zipCode' required>
+              <mat-error *ngIf="zipCode.invalid">{{ getZipCodeErrorMessage() }}</mat-error>
+            </mat-form-field>
+            <br>
+            <br>
+            <p *ngIf="!passwordMatch()" style="color: red;"> Password Mismatch </p>
+            <button *ngIf="!loading" class="btn btn-light" mat-button (click)="sellerSignUp()">Sign Up</button>
+          </form>
+        </mat-tab>
+      </div>
+    </mat-tab-group>
+  </div>
+</mat-card>

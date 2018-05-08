@@ -11,6 +11,8 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule} from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 // Routing
@@ -83,7 +85,9 @@ import { AccountsService } from './services/accounts.service';
     ReactiveFormsModule,
     MatSelectModule,
     FileUploadModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     ProductsService,
