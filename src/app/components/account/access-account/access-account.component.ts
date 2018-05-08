@@ -18,7 +18,7 @@ import { Customer } from '../../../models/customer';
 export class AccessAccountComponent implements OnInit {
 
   acc: Account = new Account();
-  loggedAcc = localStorage.getItem('account'); // used to check if already loggedin
+
   invalid = false;
   notUnique = false;
 
@@ -50,12 +50,19 @@ export class AccessAccountComponent implements OnInit {
 
 
 
-  constructor(private accService: AccountsService, private router: Router) { }
+  constructor(private accService: AccountsService, private router: Router, private prod: ProductsService) {
+    prod.getItemsByZipSellerId('70').subscribe(items => {
+      if (items == null) {
+        console.log('failed to give ');
+      } else {
+        console.log(items);
+      }
+    });
+  }
 
 
   ngOnInit() {
-    if (this.loggedAcc != null) {
-      this.accService.account.next(JSON.parse(localStorage.getItem('account')));
+    if (localStorage.getItem('customer') != null && localStorage.getItem('seller') != null && localStorage.getItem('admin') != null) {
       this.router.navigate(['profile']);
     }
   }
@@ -69,14 +76,26 @@ export class AccessAccountComponent implements OnInit {
 
     if (this.username.valid && this.password.valid) { // valid formats
       this.accService.accountLogin(this.acc).subscribe(accs => {
-        console.log(accs);
+
         if (accs == null) {
           this.invalid = true;
           console.log('invalid username or password');
         } else {
-          this.accService.account.next(accs);
-          localStorage.setItem('account', JSON.stringify(accs));
-          console.log(localStorage.getItem('account'));
+          /*
+            checks if the api call returns a seller, customer
+            or admin and then addsto localstorage
+          */
+          const json = JSON.stringify(accs);
+          if (json.substr(2, 8) === 'customer') {
+            this.accService.customer.next(JSON.parse(json));
+            localStorage.setItem('customer', JSON.stringify(json));
+          } else if (json.substr(2, 6)  === 'seller') {
+            console.log('added seller to local storage');
+            localStorage.setItem('seller', JSON.stringify(json));
+          } else if (json.substr(2, 5) === 'admin') {
+            this.accService.admin.next(JSON.parse(json));
+            localStorage.setItem('admin', JSON.stringify(json));
+          }
           this.router.navigate(['profile']);
         }
       });
@@ -106,8 +125,7 @@ export class AccessAccountComponent implements OnInit {
         } else {
           this.accService.customer.next(cus);
           localStorage.setItem('customer', JSON.stringify(cus));
-          localStorage.setItem('account', JSON.stringify(cus.account));
-          console.log(localStorage.getItem('customer'));
+
           this.router.navigate(['profile']);
         }
       });
@@ -143,8 +161,7 @@ export class AccessAccountComponent implements OnInit {
         } else {
           this.accService.seller.next(sel);
           localStorage.setItem('seller', JSON.stringify(sel));
-          localStorage.setItem('account', JSON.stringify(sel.account));
-          console.log(localStorage.getItem('customer'));
+
           this.router.navigate(['profile']);
         }
       });
