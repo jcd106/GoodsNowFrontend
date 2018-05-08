@@ -13,6 +13,7 @@ const HTTP_OPTIONS = {
 @Injectable()
 export class ProductsService {
   category: BehaviorSubject<String> = new BehaviorSubject<String>('');
+  subscribers: BehaviorSubject<Item> = new BehaviorSubject<Item>(null);
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +26,7 @@ export class ProductsService {
   }
 
   addItem(item: Item) {
-    return this.http.post<Item>(environment.backEndApiUrl + 'item', JSON.stringify(item), HTTP_OPTIONS);
+    return this.http.post<Item>(environment.backEndApiUrl + 'items', JSON.stringify(item), HTTP_OPTIONS);
   }
 
   getItemsByCategory(category: String) {

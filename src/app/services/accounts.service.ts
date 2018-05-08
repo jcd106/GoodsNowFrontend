@@ -18,6 +18,7 @@ export class AccountsService {
   account: BehaviorSubject<Account> = new BehaviorSubject<Account>(null);
   customer: BehaviorSubject<Customer> = new BehaviorSubject<Customer>(null);
   seller: BehaviorSubject<Seller> = new BehaviorSubject<Seller>(null);
+  loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>((localStorage.getItem('user') !== null) ? true : false);
 
   constructor(private http: HttpClient) {
     const acc = localStorage.getItem('account');
@@ -36,5 +37,9 @@ export class AccountsService {
 
   public sellerSignUp(Account: Account, Seller: Seller) {
     return this.http.post<Seller>(environment.backEndApiUrl + 'register/seller', JSON.stringify({Account, Seller}), HTTP_OPTIONS);
+  }
+
+  public getLoggedIn() {
+    return this.loggedIn;
   }
 }
