@@ -13,6 +13,7 @@ const HTTP_OPTIONS = {
 @Injectable()
 export class ProductsService {
   category: BehaviorSubject<String> = new BehaviorSubject<String>('');
+  subscribers: BehaviorSubject<Item> = new BehaviorSubject<Item>(null);
 
   constructor(private http: HttpClient) { }
 

@@ -29,8 +29,18 @@
 }
 
 /* general site css */
-.container-fluid{
+.container{
     margin-top: 8em;
-    margin-left: 1em !important;
-    padding-right: 3em !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+}
+.btn-primary{
+    background-color: #EE7354;
+    border-color: rgb(170, 84, 62);
+}
+
+.btn-primary:hover{
+    background-color: rgb(204, 89, 60);
+    border-color: rgb(138, 66, 48);
 }
