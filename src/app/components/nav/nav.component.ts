@@ -11,7 +11,7 @@ import { AccountsService } from '../../services/accounts.service';
 export class NavComponent implements OnInit {
   loggedIn: boolean = (localStorage.getItem('user') !== null) ? true : false;
 
-  constructor(private accService: AccountsService, private productsService: ProductsService, private router: Router) { 
+  constructor(private accService: AccountsService, private productsService: ProductsService, private router: Router) {
     this.accService.getLoggedIn().subscribe(loggedIn => {
       this.loggedIn = loggedIn;
     });
