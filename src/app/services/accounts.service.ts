@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Account } from '../models/account';
 import { Seller } from '../models/seller';
 import { Customer } from '../models/customer';
-
+import { Admin } from '../models/admin';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({
@@ -18,8 +18,8 @@ export class AccountsService {
 
   customer: BehaviorSubject<Customer> = new BehaviorSubject<Customer>(null);
   seller: BehaviorSubject<Seller> = new BehaviorSubject<Seller>(null);
-  loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>((localStorage.getItem('user') !== null) ? true : false);
-  admin: BehaviorSubject<Seller> = new BehaviorSubject<Seller>(null);
+  loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>((localStorage.getItem('accType') !== null) ? true : false);
+  admin: BehaviorSubject<Admin> = new BehaviorSubject<Admin>(null);
 
   constructor(private http: HttpClient) {
 

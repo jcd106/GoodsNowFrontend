@@ -1,3 +1,8 @@
-<p>
-  profile works!
-</p>
+<div>
+  <div *ngIf="accType === 'customer'">
+      <mat-card>
+        <h3>Hey, {{ customer.firstName }} {{ customer.lastName }} this is your profile</h3>
+        <p> {{ customer.firstName }} </p>
+      </mat-card>
+  </div>
+</div>

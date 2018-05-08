@@ -19,6 +19,7 @@ export class AccessAccountComponent implements OnInit {
 
   acc: Account = new Account();
 
+  loading = false;
   invalid = false;
   notUnique = false;
 
@@ -48,18 +49,7 @@ export class AccessAccountComponent implements OnInit {
   state = new FormControl('', [Validators.required]);
   zipCode = new FormControl('', [Validators.required, Validators.maxLength(5), Validators.minLength(5), Validators.pattern('^[0-9]*$')]);
 
-
-
-  constructor(private accService: AccountsService, private router: Router, private prod: ProductsService) {
-    prod.getItemsByZipSellerId('70').subscribe(items => {
-      if (items == null) {
-        console.log('failed to give ');
-      } else {
-        console.log(items);
-      }
-    });
-  }
-
+  constructor(private accService: AccountsService, private router: Router) {}
 
   ngOnInit() {
     if (localStorage.getItem('customer') != null && localStorage.getItem('seller') != null && localStorage.getItem('admin') != null) {
@@ -68,6 +58,7 @@ export class AccessAccountComponent implements OnInit {
   }
 
   login() {
+    this.loading = true;
     console.log('Attempting to log in');
     this.acc.accountId = 0;
     this.acc.roleId = 0;
@@ -79,6 +70,7 @@ export class AccessAccountComponent implements OnInit {
 
         if (accs == null) {
           this.invalid = true;
+          this.loading = false;
           console.log('invalid username or password');
         } else {
           /*
@@ -88,14 +80,18 @@ export class AccessAccountComponent implements OnInit {
           const json = JSON.stringify(accs);
           if (json.substr(2, 8) === 'customer') {
             this.accService.customer.next(JSON.parse(json));
-            localStorage.setItem('customer', JSON.stringify(json));
+            localStorage.setItem('customer', json);
+            localStorage.setItem('accType', 'customer');
           } else if (json.substr(2, 6)  === 'seller') {
             console.log('added seller to local storage');
-            localStorage.setItem('seller', JSON.stringify(json));
+            localStorage.setItem('seller', json);
+            localStorage.setItem('accType', 'seller');
           } else if (json.substr(2, 5) === 'admin') {
             this.accService.admin.next(JSON.parse(json));
-            localStorage.setItem('admin', JSON.stringify(json));
+            localStorage.setItem('admin', json);
+            localStorage.setItem('accType', 'admin');
           }
+          this.accService.loggedIn.next(true);
           this.router.navigate(['profile']);
         }
       });
