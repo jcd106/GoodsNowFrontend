@@ -30,4 +30,8 @@ export class BrowseProductsComponent implements OnInit {
     this.productsService.setCategory(cat);
   }
 
+  get pageProducts() {
+    return this.items.slice((this.page - 1) * 10, this.page * 10);
+ }
+
 }
