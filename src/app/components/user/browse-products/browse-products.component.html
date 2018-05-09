@@ -17,7 +17,7 @@
       <div class="col col-sm-9">
         
         <div class="row products-row">
-          <ng-container *ngFor="let item of items">
+          <ng-container *ngFor="let item of pageProducts">
             <div class="browse-card product-card row">
               <cl-image class="preview-image" public-id="{{item.image}}" cloud-name="goodsnow"  width="125" height="100" crop="fill" gravity="center"></cl-image>
               <div class="col col-sm-6">
@@ -31,7 +31,7 @@
           </ng-container>
         </div>
 
-        <ngb-pagination class="float-right" [collectionSize]="products.length" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"></ngb-pagination>
+        <ngb-pagination class="float-right" [collectionSize]="items.length" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"></ngb-pagination>
       </div>
     </div>
   </div>

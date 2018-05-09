@@ -9,9 +9,8 @@ import { Item } from '../../../models/Item';
 })
 export class BrowseProductsComponent implements OnInit {
   page = 1;
-  products: any[] = new Array(100);
   category: String = '';
-  items: Item[] = new Array();
+  items: Item[] = new Array(0);
 
   constructor(private productsService: ProductsService) { }
 
