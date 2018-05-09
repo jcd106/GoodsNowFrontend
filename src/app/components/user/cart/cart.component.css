@@ -1,6 +1,7 @@
 .item-card{
     border: 1px solid #E5E5E5;
     background-color: rgba(248, 247, 247, 0.527);
+    margin-bottom: 0.25em;
 }
 .preview-image{
     margin: 0.5em;
@@ -9,4 +10,8 @@
 }
 .quantity{
     width: 4em;
+}
+.button{
+    margin-bottom: 0.5em;
+    margin-left: 0.5em;
 }

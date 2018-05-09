@@ -44,4 +44,13 @@ export class CartService {
     }
   }
 
+  deleteCartItem(item: CartItem) {
+    return this.http.request<CartItem>('DELETE', environment.backEndApiUrl + 'cartitems', {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify(item)
+    });
+  }
+
 }
