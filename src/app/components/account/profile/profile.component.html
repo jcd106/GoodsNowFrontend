@@ -1,8 +1,55 @@
 <div>
   <div *ngIf="accType === 'customer'">
-      <mat-card>
-        <h3>Hey, {{ customer.firstName }} {{ customer.lastName }} this is your profile</h3>
-        <p> {{ customer.firstName }} </p>
+    <mat-card>
+      <h3>Hey, {{ customer.firstName }} {{ customer.lastName }} this is your profile</h3>
+      <p> {{ customer.firstName }} </p>
+      <mat-card class="card-select"  (click)="navigate('browse');">
+        <div>
+          <h5 style="text-align: left;"><b>Browse Products</b></h5>
+        </div>
       </mat-card>
+      <br>
+      <mat-card class="card-select" (click)="navigate('404');">
+        <div>
+          <h5 style="text-align: left;"> <b>View orders</b></h5>
+        </div>
+      </mat-card>
+      <br>
+      <mat-card class="card-select" (click)="navigate('profile/update');">
+        <div>
+          <h5 style="text-align: left;"><b>Manage profile</b></h5>
+        </div>
+      </mat-card>
+    </mat-card>
+  </div>
+  <div *ngIf="accType === 'seller'">
+    <mat-card>
+      <h3>Hey, {{ seller.name }} this is your profile</h3>
+      <p> {{ seller.name }} What would you like to do?</p>
+      <br>
+      <mat-card class="card-select"  (click)="navigate('products/add');">
+        <div>
+          <h5 style="text-align: left;"><b>Add a new product</b> to you catalog</h5>
+        </div>
+      </mat-card>
+      <br>
+      <mat-card class="card-select" (click)="navigate('404');">
+        <div>
+          <h5 style="text-align: left;"> <b>View orders </b></h5>
+        </div>
+      </mat-card>
+      <br>
+      <mat-card class="card-select" (click)="navigate('404');">
+        <div>
+          <h5 style="text-align: left;"><b>Manage existing products</b></h5>
+        </div>
+      </mat-card>
+      <br>
+      <mat-card class="card-select" (click)="navigate('profile/update');">
+        <div>
+          <h5 style="text-align: left;"><b>Manage profile</b></h5>
+        </div>
+      </mat-card>
+    </mat-card>
   </div>
 </div>

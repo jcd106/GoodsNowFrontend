@@ -122,8 +122,10 @@ export class AccessAccountComponent implements OnInit {
           console.log('username or email already exist');
         } else {
           this.accService.customer.next(cus);
+          localStorage.setItem('accType', 'customer');
           localStorage.setItem('customer', JSON.stringify(cus));
 
+          this.accService.loggedIn.next(true);
           this.router.navigate(['profile']);
         }
       });
@@ -158,8 +160,10 @@ export class AccessAccountComponent implements OnInit {
           console.log('username or email already exist');
         } else {
           this.accService.seller.next(sel);
+          localStorage.setItem('accType', 'seller');
           localStorage.setItem('seller', JSON.stringify(sel));
 
+          this.accService.loggedIn.next(true);
           this.router.navigate(['profile']);
         }
       });

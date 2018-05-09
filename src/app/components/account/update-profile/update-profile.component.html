@@ -1,3 +1,62 @@
-<p>
-  update-profile works!
-</p>
+<div>
+  <div>
+    <mat-card>
+    <mat-card>
+      <h3>Update your profile Information</h3>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Basic Information
+            </mat-panel-title>
+            <mat-panel-description>
+              Edit your name
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngIf="accType === 'customer'">
+            <mat-form-field>
+              <input matInput [(ngModel)]="customer.firstName">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [(ngModel)]="customer.lastName">
+            </mat-form-field>
+          </div>
+          <div *ngIf="accType === 'seller'">
+            <mat-form-field>
+              <input matInput [(ngModel)]='seller.name'>
+            </mat-form-field>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel *ngIf="accType === 'seller'">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Address
+                </mat-panel-title>
+                <mat-panel-description>
+                  Edit Address
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-form-field>
+                  <input matInput [(ngModel)]="seller.address">
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput [(ngModel)]="seller.city">
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput [(ngModel)]="seller.zipcode">
+              </mat-form-field>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card>
+    <mat-card>
+      <button style="align-content: right;" class="btn btn-light" mat-button (click)="update()">Update</button>
+    </mat-card>
+    </mat-card>
+
+  </div>
+  <div>
+
+
+  </div>
+
+</div>
