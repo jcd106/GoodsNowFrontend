@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Customer } from '../../../models/customer';
 import { Seller } from '../../../models/seller';
 import { Admin } from '../../../models/admin';
@@ -11,7 +12,7 @@ import {MatCardModule} from '@angular/material/card';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   accType: String = localStorage.getItem('accType');
   customer: Customer;
@@ -28,4 +29,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  navigate(where: String) {
+    this.router.navigate([where]);
+  }
 }
