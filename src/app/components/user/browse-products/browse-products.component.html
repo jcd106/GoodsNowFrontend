@@ -17,29 +17,21 @@
       <div class="col col-sm-9">
         
         <div class="row products-row">
-          <div class="browse-card product-card row">
-            <cl-image class="preview-image" public-id="rmkprdtti46edpoitpt6" cloud-name="goodsnow"  width="125" height="100" crop="fill" gravity="center"></cl-image>
-            <div class="col col-sm-6">
-              <br>
-              <h6><strong>Nikon D7200</strong></h6>
-              <hr>
-              {{999.99 | currency}}
-              <mat-icon class="icon float-right">add_shopping_cart</mat-icon>
+          <ng-container *ngFor="let item of pageProducts">
+            <div class="browse-card product-card row">
+              <cl-image class="preview-image" public-id="{{item.image}}" cloud-name="goodsnow"  width="125" height="100" crop="fill" gravity="center"></cl-image>
+              <div class="col col-sm-6">
+                <br>
+                <h6><strong>{{item.itemName}}</strong></h6>
+                <hr>
+                {{item.price | currency}}
+                <a href="javascript:void(0)"><mat-icon class="icon float-right">add_shopping_cart</mat-icon></a>
+              </div>
             </div>
-          </div>
-          <div class="browse-card product-card row">
-            <cl-image class="preview-image" public-id="m7apym8mwvkfkwidfend" cloud-name="goodsnow"  width="125" height="100" crop="fill" gravity="center"></cl-image>
-            <div class="col col-sm-6">
-              <br>
-              <h6><strong>Fujifilm X100F</strong></h6>
-              <hr>
-              {{1099.00 | currency}}
-              <mat-icon class="icon float-right">add_shopping_cart</mat-icon>
-            </div>
-          </div>
+          </ng-container>
         </div>
 
-        <ngb-pagination class="float-right" [collectionSize]="products.length" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"></ngb-pagination>
+        <ngb-pagination class="float-right" [collectionSize]="items.length" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" size="sm"></ngb-pagination>
       </div>
     </div>
   </div>
