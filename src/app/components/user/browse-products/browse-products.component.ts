@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../../services/products.service';
+import { Item } from '../../../models/Item';
 
 @Component({
   selector: 'app-browse-products',
@@ -10,13 +11,19 @@ export class BrowseProductsComponent implements OnInit {
   page = 1;
   products: any[] = new Array(100);
   category: String = '';
+  items: Item[] = new Array();
 
   constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
     this.productsService.getCategory().subscribe(category => {
       this.category = category;
-      console.log(this.category);
+      this.productsService.getItemsByCategory(this.category).subscribe(items => {
+        this.items = items.filter(item => item.category === this.category);
+      });
+    });
+    this.productsService.getItemsByCategory(this.category).subscribe(items => {
+      this.items = items;
     });
   }
 
