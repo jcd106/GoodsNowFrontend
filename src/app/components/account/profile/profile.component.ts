@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Customer } from '../../../models/customer';
 import { Seller } from '../../../models/seller';
 import { Admin } from '../../../models/admin';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-profile',

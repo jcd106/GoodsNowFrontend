@@ -2,7 +2,8 @@
   <div>
     <mat-card>
     <mat-card>
-      <h3>Update your profile Information</h3>
+      <h3 *ngIf="accType === 'customer'">Update your profile Information {{ customer.firstName }} </h3>
+      <h3 *ngIf="accType === 'seller'">Update your profile Information {{ seller.name }} </h3>
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -46,13 +47,32 @@
                   <input matInput [(ngModel)]="seller.zipcode">
               </mat-form-field>
         </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Password
+          </mat-panel-title>
+          <mat-panel-description>
+            Change your password
+            <br>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field class="full-width">
+          <input matInput type="password" placeholder="New Password" [formControl]="password" required>
+          <mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="full-width">
+          <input matInput type="password" placeholder="Confirm New Password" [formControl]="passwordConfirm" required>
+        </mat-form-field>
+      </mat-expansion-panel>
+      <p *ngIf="!passwordMatch()" style="color: red;">Password Mismatch </p>
       </mat-accordion>
     </mat-card>
-    <mat-card>
+    <mat-card *ngIf="passwordMatch()">
       <button style="align-content: right;" class="btn btn-light" mat-button (click)="update()">Update</button>
     </mat-card>
     </mat-card>
-
   </div>
   <div>
 

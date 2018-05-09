@@ -2,7 +2,7 @@
   <div *ngIf="accType === 'customer'">
     <mat-card>
       <h3>Hey, {{ customer.firstName }} {{ customer.lastName }} this is your profile</h3>
-      <p> {{ customer.firstName }} </p>
+      <br>
       <mat-card class="card-select"  (click)="navigate('browse');">
         <div>
           <h5 style="text-align: left;"><b>Browse Products</b></h5>
@@ -17,7 +17,7 @@
       <br>
       <mat-card class="card-select" (click)="navigate('profile/update');">
         <div>
-          <h5 style="text-align: left;"><b>Manage profile</b></h5>
+          <h5 style="text-align: left;"><b>Update profile</b></h5>
         </div>
       </mat-card>
     </mat-card>
@@ -47,7 +47,7 @@
       <br>
       <mat-card class="card-select" (click)="navigate('profile/update');">
         <div>
-          <h5 style="text-align: left;"><b>Manage profile</b></h5>
+          <h5 style="text-align: left;"><b>Update profile</b></h5>
         </div>
       </mat-card>
     </mat-card>

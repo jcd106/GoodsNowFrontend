@@ -35,12 +35,24 @@ export class AccountsService {
     return this.http.post<JSON>(environment.backEndApiUrl + 'login', JSON.stringify(acc), HTTP_OPTIONS);
   }
 
+  public accountUpdate(updatedAcc: Account) {
+    return this.http.put<JSON>(environment.backEndApiUrl + 'accounts', JSON.stringify(updatedAcc), HTTP_OPTIONS);
+  }
+
   public customerSignUp(Account: Account, Customer: Customer) {
-    return this.http.post<Customer>( environment.backEndApiUrl + 'register/customer', JSON.stringify({Account, Customer}), HTTP_OPTIONS );
+    return this.http.post<Customer>(environment.backEndApiUrl + 'register/customer', JSON.stringify({Account, Customer}), HTTP_OPTIONS );
+  }
+
+  public customerUpdate(updatedCustomer: Customer) {
+    return this.http.put<Customer>(environment.backEndApiUrl + 'customers', JSON.stringify(updatedCustomer), HTTP_OPTIONS);
   }
 
   public sellerSignUp(Account: Account, Seller: Seller) {
     return this.http.post<Seller>(environment.backEndApiUrl + 'register/seller', JSON.stringify({Account, Seller}), HTTP_OPTIONS);
+  }
+
+  public sellerUpdate(Seller: Seller) {
+    return this.http.put<Seller>(environment.backEndApiUrl + 'sellers', JSON.stringify(Seller), HTTP_OPTIONS);
   }
 
   public getLoggedIn() {
