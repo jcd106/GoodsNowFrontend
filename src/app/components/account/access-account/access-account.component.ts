@@ -7,6 +7,7 @@ import { ProductsService } from '../../../services/products.service';
 import { Router } from '@angular/router';
 import { Seller } from '../../../models/seller';
 import { Customer } from '../../../models/customer';
+import { CartService } from '../../../services/cart.service';
 
 
 @Component({
@@ -49,7 +50,7 @@ export class AccessAccountComponent implements OnInit {
   state = new FormControl('', [Validators.required]);
   zipCode = new FormControl('', [Validators.required, Validators.maxLength(5), Validators.minLength(5), Validators.pattern('^[0-9]*$')]);
 
-  constructor(private accService: AccountsService, private router: Router) {}
+  constructor(private cartService: CartService, private accService: AccountsService, private router: Router) {}
 
   ngOnInit() {
     if (localStorage.getItem('customer') != null && localStorage.getItem('seller') != null && localStorage.getItem('admin') != null) {
@@ -82,6 +83,7 @@ export class AccessAccountComponent implements OnInit {
             this.accService.customer.next(JSON.parse(json));
             localStorage.setItem('customer', json);
             localStorage.setItem('accType', 'customer');
+            this.cartService.updateCartCount();
           } else if (json.substr(2, 6)  === 'seller') {
             console.log('added seller to local storage');
             localStorage.setItem('seller', json);
