@@ -21,17 +21,7 @@ export class NavComponent implements OnInit {
     this.cartService.getCartCount().subscribe(cartCount => {
       this.cartCount = cartCount;
     });
-    const customer = localStorage.getItem('customer');
-    if (customer != null) {
-      this.cartService.getCartItemsByCustomerId(JSON.parse(customer).customerId).subscribe(cart => {
-        let cartCount = 0;
-        for (const item of cart) {
-          cartCount += item.quantity;
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        this.cartService.cartCount.next(cartCount);
-      });
-    }
+    this.cartService.updateCartCount();
   }
 
   ngOnInit() {

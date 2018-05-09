@@ -9,12 +9,20 @@ import { CartService } from '../../../services/cart.service';
 })
 export class CartComponent implements OnInit {
   cartItem: CartItem[] = new Array();
+  totalPrice: Number = 0;
 
   constructor(private cartService: CartService) {}
 
   ngOnInit() {
+    const customer = localStorage.getItem('customer');
+    if (customer != null) {
+      this.cartService.getCartItemsByCustomerId(JSON.parse(customer).customerId).subscribe(cart => {
+        this.cartItem = cart;
+        for (const cartItem of this.cartItem) {
+          this.totalPrice += cartItem.cartItemId.item.price;
+        }
+      });
+    }
   }
-
-  
 
 }
