@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartItem } from '../../../models/cartItem';
 import { CartService } from '../../../services/cart.service';
 declare let paypal: any;
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
