@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from '../../../models/cartItem';
 import { CartService } from '../../../services/cart.service';
-
+declare let paypal: any;
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -13,6 +13,7 @@ export class CartComponent implements OnInit {
   addScript: Boolean = false;
   paypalLoad: Boolean = true;
   updatedCartItem: CartItem = new CartItem();
+
 
   // PayPal Express Checkout stuff
   paypalConfig = {
@@ -61,6 +62,7 @@ export class CartComponent implements OnInit {
       });
     }
     // more PayPal Stuff
+
     if (!this.addScript) {
       this.addPaypalScript().then(() => {
         paypal.Button.render(this.paypalConfig, '#paypal-checkout-btn');
