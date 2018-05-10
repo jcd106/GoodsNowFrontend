@@ -10,7 +10,6 @@ import { CartService } from '../../../services/cart.service';
 export class CartComponent implements OnInit {
   cartItem: CartItem[] = new Array();
   totalPrice: Number = 0;
-  updatedCartItem: CartItem = new CartItem();
 
   constructor(private cartService: CartService) {}
 
@@ -29,7 +28,6 @@ export class CartComponent implements OnInit {
   }
 
   updateCartItem(item: CartItem) {
-    item.quantity = this.updatedCartItem.quantity;
     this.cartService.updateCartItem(item).subscribe(cartItem => {
       const customer = localStorage.getItem('customer');
       if (customer != null) {
