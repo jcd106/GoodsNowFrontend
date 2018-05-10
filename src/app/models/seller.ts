@@ -11,4 +11,5 @@ export class Seller {
     state: string;
     zipcode: string;
     items: Item[];
+    money: number;
 }

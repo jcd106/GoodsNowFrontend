@@ -44,6 +44,7 @@ import { ProductsService } from './services/products.service';
 import { AccountsService } from './services/accounts.service';
 import { CartService } from './services/cart.service';
 import { CheckoutService } from './services/checkout.service';
+import { AdminService } from './services/admin.service';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import { CheckoutService } from './services/checkout.service';
     ProductsService,
     AccountsService,
     CartService,
-    CheckoutService
+    CheckoutService,
+    AdminService
   ],
   bootstrap: [AppComponent]
 })

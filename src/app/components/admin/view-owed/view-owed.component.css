@@ -1,0 +1,10 @@
+.seller-card{
+    border: 1px solid #E5E5E5;
+    background-color: rgba(248, 247, 247, 0.527);
+    margin-bottom: 0.25em;
+    margin-top: 0.25em;
+}
+
+.seller-contents{
+    margin: 0.25em;
+}

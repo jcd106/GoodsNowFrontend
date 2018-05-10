@@ -20,6 +20,9 @@ export class AccountsService {
   seller: BehaviorSubject<Seller> = new BehaviorSubject<Seller>(null);
   loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>((localStorage.getItem('accType') !== null) ? true : false);
   admin: BehaviorSubject<Admin> = new BehaviorSubject<Admin>(null);
+  currCustomer: BehaviorSubject<boolean> = new BehaviorSubject<boolean>((localStorage.getItem('customer') !== null) ? true : false);
+  currAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>((localStorage.getItem('admin') !== null) ? true : false);
+  currSeller: BehaviorSubject<boolean> = new BehaviorSubject<boolean>((localStorage.getItem('seller') !== null) ? true : false);
 
   constructor(private http: HttpClient) {
 
@@ -45,5 +48,15 @@ export class AccountsService {
 
   public getLoggedIn() {
     return this.loggedIn;
+  }
+
+  getCustomer() {
+    return this.currCustomer;
+  }
+  getAdmin() {
+    return this.currAdmin;
+  }
+  getSeller() {
+    return this.currSeller;
   }
 }

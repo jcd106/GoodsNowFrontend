@@ -83,18 +83,23 @@ export class AccessAccountComponent implements OnInit {
             this.accService.customer.next(JSON.parse(json));
             localStorage.setItem('customer', json);
             localStorage.setItem('accType', 'customer');
+            this.accService.currCustomer.next(true);
             this.cartService.updateCartCount();
+            this.router.navigate(['profile']);
           } else if (json.substr(2, 6)  === 'seller') {
             console.log('added seller to local storage');
             localStorage.setItem('seller', json);
             localStorage.setItem('accType', 'seller');
+            this.accService.currSeller.next(true);
+            this.router.navigate(['profile']);
           } else if (json.substr(2, 5) === 'admin') {
             this.accService.admin.next(JSON.parse(json));
             localStorage.setItem('admin', json);
             localStorage.setItem('accType', 'admin');
+            this.accService.currAdmin.next(true);
+            this.router.navigate(['view/owed']);
           }
           this.accService.loggedIn.next(true);
-          this.router.navigate(['profile']);
         }
       });
     }
@@ -126,6 +131,7 @@ export class AccessAccountComponent implements OnInit {
           localStorage.setItem('customer', JSON.stringify(cus));
 
           this.accService.loggedIn.next(true);
+          this.accService.currCustomer.next(true);
           this.router.navigate(['profile']);
         }
       });
@@ -164,6 +170,7 @@ export class AccessAccountComponent implements OnInit {
           localStorage.setItem('seller', JSON.stringify(sel));
 
           this.accService.loggedIn.next(true);
+          this.accService.currSeller.next(true);
           this.router.navigate(['profile']);
         }
       });

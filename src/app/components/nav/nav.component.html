@@ -2,8 +2,11 @@
   <!-- user bar -->
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark userbar">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
+      <li *ngIf="customer || seller" class="nav-item">
           <a class="nav-link" *ngIf="loggedIn" routerLink="/profile"><mat-icon class="icon">account_circle</mat-icon>My Account</a>
+      </li>
+      <li *ngIf="admin"class="nav-item">
+          <a class="nav-link" *ngIf="loggedIn" routerLink="/view/owed"><mat-icon class="icon">attach_money</mat-icon>Owed Sellers</a>
       </li>
       <li class="nav-item">
           <a class="nav-link" *ngIf="!loggedIn" routerLink="/access"><mat-icon class="icon">input</mat-icon>Sign In</a>
@@ -21,7 +24,7 @@
         <li class="nav-item active">
           <a class="nav-link" routerLink="/home">Home</a>
         </li>
-        <li ngbDropdown  class="nav-item dropdown" >
+        <li ngbDropdown *ngIf="customer" class="nav-item dropdown" >
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Shop
           </a>
@@ -34,7 +37,7 @@
           </div>
         </li>
       </ul>
-      <ul class="navbar-nav ml-auto">
+      <ul *ngIf="customer" class="navbar-nav ml-auto">
         <li class="nav-item">
             <a class="nav-link checkout-cart" routerLink="/cart"><mat-icon class="icon">shopping_cart</mat-icon></a>
         </li>
