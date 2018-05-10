@@ -21,9 +21,10 @@ export class ManageProductsComponent implements OnInit {
   }
 
   deleteItem(item: Item) {
-    this.prodService.deleteItem(item).subscribe();
-    this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
-    this.router.navigate(['/products']));
+    this.prodService.deleteItem(item).subscribe(item => {
+      this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() =>
+      this.router.navigate(['/products']));
+    });
   }
 
 }

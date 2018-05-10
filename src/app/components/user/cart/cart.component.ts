@@ -12,9 +12,11 @@ export class CartComponent implements OnInit {
   totalPrice: Number = 0;
   addScript: Boolean = false;
   paypalLoad: Boolean = true;
+  updatedCartItem: CartItem = new CartItem();
 
   // PayPal Express Checkout stuff
   paypalConfig = {
+    // leave this set to Sandbox
     env: 'sandbox',
     client: {
       sandbox: 'AQQ_h9TbADWcwA0hS1dVOkRMX9wtBj32T-RsOOpjUn5V0NYqMihrMmK-mGFaPslx2hX97zFP-JZgHj5m',
@@ -67,7 +69,9 @@ export class CartComponent implements OnInit {
     }
   }
 
-  updateCartItem(item: CartItem) {}
+  updateCartItem(item: CartItem) {
+    item.quantity = this.updatedCartItem.quantity;
+  }
 
   deleteCartItem(item: CartItem) {
     console.log('Delete');
