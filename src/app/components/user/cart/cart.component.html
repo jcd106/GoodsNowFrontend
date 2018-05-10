@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col col-sm-7">
     <ng-container *ngFor="let cartItem of cartItem">
-      <form ngNativeValidate (ngSubmit)="update(cartItem)">
+      <form ngNativeValidate (ngSubmit)="updateCartItem(cartItem)">
         <div class="item-card row">
           <cl-image class="preview-image" public-id="{{cartItem.cartItemId.item.image}}" cloud-name="goodsnow"  width="150" height="125" crop="fill" gravity="center"></cl-image>
           <div class="col col-sm-8">
@@ -29,7 +29,6 @@
     <hr>
     <strong>Total Price: </strong>{{totalPrice + 0 | currency}}
     <br>
-    <h2 *ngIf="paypalLoad">Paypal button is loading</h2>
-    <div id="paypal-checkout-btn"></div>
+    <button type="submit" class="btn btn-primary" routerLink="/checkout">Checkout</button>
   </div>
 </div>

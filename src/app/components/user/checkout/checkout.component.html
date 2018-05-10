@@ -1,3 +1,34 @@
-<p>
-  checkout works!
-</p>
+<td-steps>
+    <td-step #step1 label="Shipping Information" [active]="step1Active" [disabled]="disabled1" (activated)="redoShipping()">
+      <ng-template td-step-actions>
+        <form ngNativeValidate (ngSubmit)="addShipping()">
+          <mat-form-field>
+            <input matInput class="form-container" id="address" name="order.address" [(ngModel)]="order.address" placeholder="Address" required>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput class="form-container" id="city" name="order.city" [(ngModel)]="order.city" placeholder="City" required>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput class="form-container" id="state" name="order.state" [(ngModel)]="order.state" placeholder="State" required>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput class="form-container" id="zipcode" name="order.zipcode" [(ngModel)]="order.zipcode" placeholder="ZipCode" required>
+          </mat-form-field>
+          <br>
+          <button type="submit" class="btn btn-primary">Add Shipping Info</button>
+        </form>
+      </ng-template>
+    </td-step>
+    <td-step #step2 label="Complete Checkout" [active]="step2Active" [state]="stateStep2" [disabled]="disabled2">
+      <ng-template td-step-actions>
+        <h2 *ngIf="paypalLoad">Paypal button is loading</h2>
+        <div id="paypal-checkout-btn"></div>
+      </ng-template>
+    </td-step>
+  </td-steps>
+<div *ngIf="succeeded" class="alert alert-success" id="formSuccess">
+  Payment received. Thanks for shopping with us!
+</div>
+<div *ngIf="failed" class="alert alert-danger" id="formError">
+  Payment failed. Please try again.
+</div>
