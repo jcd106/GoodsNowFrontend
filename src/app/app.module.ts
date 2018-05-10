@@ -42,6 +42,7 @@ import { AddProductComponent } from './components/seller/add-product/add-product
 // services
 import { ProductsService } from './services/products.service';
 import { AccountsService } from './services/accounts.service';
+import { CartService } from './services/cart.service';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { AccountsService } from './services/accounts.service';
   ],
   providers: [
     ProductsService,
-    AccountsService
+    AccountsService,
+    CartService
   ],
   bootstrap: [AppComponent]
 })

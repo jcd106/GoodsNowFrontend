@@ -38,7 +38,7 @@
         <li class="nav-item">
             <a class="nav-link checkout-cart" routerLink="/cart"><mat-icon class="icon">shopping_cart</mat-icon></a>
         </li>
-        <div id="checkout-count"><b>100</b></div>
+        <div *ngIf="cartCount>0" id="checkout-count"><b>{{cartCount}}</b></div> 
       </ul>
   </nav>
 </header>
