@@ -6,6 +6,8 @@ import { OrderItemId } from '../../../models/orderItemId';
 import { CartItem } from '../../../models/cartItem';
 import { OrderItem } from '../../../models/orderItem';
 import { CheckoutService } from '../../../services/checkout.service';
+import { AccountsService } from '../../../services/accounts.service';
+import { Router } from '@angular/router';
 
 declare let paypal: any;
 
@@ -27,6 +29,8 @@ export class CheckoutComponent implements OnInit {
   cart: CartItem[] = new Array();
   succeeded: Boolean = false;
   failed: Boolean = false;
+  customer: boolean = (localStorage.getItem('customer') !== null) ? true : false;
+  loggedIn: boolean = (localStorage.getItem('accType') !== null) ? true : false;
 
   // PayPal Express Checkout stuff
   paypalConfig = {
@@ -71,28 +75,40 @@ export class CheckoutComponent implements OnInit {
   };
   // End of PayPal stuff
 
-  constructor(private cartService: CartService, private checkoutService: CheckoutService) { }
+  constructor(private cartService: CartService, private checkoutService: CheckoutService,
+    private accService: AccountsService, private router: Router) { }
 
   ngOnInit() {
-    const customer = localStorage.getItem('customer');
-    if (customer != null) {
-      this.cartService.getCartItemsByCustomerId(JSON.parse(customer).customerId).subscribe(cart => {
-        this.cart = cart;
-        for (const cartItem of cart) {
-          let totalPrice = this.totalPrice.valueOf();
-          totalPrice += cartItem.cartItemId.item.price * cartItem.quantity;
-          this.totalPrice = totalPrice;
-        }
-      });
-    }
+    this.accService.getLoggedIn().subscribe(loggedIn => {
+      this.loggedIn = loggedIn;
+    });
+    this.accService.getCustomer().subscribe(customer => {
+      this.customer = customer;
+    });
+    if (this.customer) {
+      const customer = localStorage.getItem('customer');
+      if (customer != null) {
+        this.cartService.getCartItemsByCustomerId(JSON.parse(customer).customerId).subscribe(cart => {
+          this.cart = cart;
+          for (const cartItem of cart) {
+            let totalPrice = this.totalPrice.valueOf();
+            totalPrice += cartItem.cartItemId.item.price * cartItem.quantity;
+            this.totalPrice = totalPrice;
+          }
+        });
+      }
+      // more PayPal Stuff
 
-    // more PayPal Stuff
-
-    if (!this.addScript) {
-      this.addPaypalScript().then(() => {
-        paypal.Button.render(this.paypalConfig, '#paypal-checkout-btn');
-        this.paypalLoad = false;
-      });
+      if (!this.addScript) {
+        this.addPaypalScript().then(() => {
+          paypal.Button.render(this.paypalConfig, '#paypal-checkout-btn');
+          this.paypalLoad = false;
+        });
+      }
+    } else if (!this.loggedIn) {
+      this.router.navigate(['401']);
+    } else {
+      this.router.navigate(['403']);
     }
   }
 

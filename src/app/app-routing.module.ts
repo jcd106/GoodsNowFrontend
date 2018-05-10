@@ -18,10 +18,14 @@ import { BrowseProductsComponent } from './components/user/browse-products/brows
 import { CartComponent } from './components/user/cart/cart.component';
 import { CheckoutComponent } from './components/user/checkout/checkout.component';
 import { AddProductComponent } from './components/seller/add-product/add-product.component';
+import { UnauthorizedComponent } from './components/error/unauthorized/unauthorized.component';
+import { ForbiddenComponent } from './components/error/forbidden/forbidden.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: '401', component: UnauthorizedComponent},
+  { path: '403', component: ForbiddenComponent},
   { path: '404', component: NotFoundComponent},
   { path: 'access', component: AccessAccountComponent },
   { path: 'profile', component: ProfileComponent },

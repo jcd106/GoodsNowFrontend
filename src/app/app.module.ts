@@ -45,6 +45,8 @@ import { AccountsService } from './services/accounts.service';
 import { CartService } from './services/cart.service';
 import { CheckoutService } from './services/checkout.service';
 import { AdminService } from './services/admin.service';
+import { UnauthorizedComponent } from './components/error/unauthorized/unauthorized.component';
+import { ForbiddenComponent } from './components/error/forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { AdminService } from './services/admin.service';
     ViewStoreOrdersComponent,
     FullfillOrderComponent,
     OrderHistoryComponent,
-    ViewOrderComponent
+    ViewOrderComponent,
+    UnauthorizedComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,

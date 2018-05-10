@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ProductsService } from '../../../services/products.service';
 import { Item } from '../../../models/Item';
 import { Seller } from '../../../models/seller';
+import { AccountsService } from '../../../services/accounts.service';
 
 @Component({
   selector: 'app-add-product',
@@ -20,8 +21,11 @@ export class AddProductComponent implements OnInit {
   );
   item: Item = new Item();
   seller: Seller = JSON.parse(localStorage.getItem('seller'));
+  currSeller: boolean = (localStorage.getItem('seller') !== null) ? true : false;
+  loggedIn: boolean = (localStorage.getItem('accType') !== null) ? true : false;
 
-  constructor(private location: Location, private router: Router, private prodService: ProductsService) {
+  constructor(private location: Location, private router: Router, private prodService: ProductsService,
+    private accService: AccountsService) {
     // Override onSuccessItem to retrieve the imageId
     this.uploader.onSuccessItem = (item: any, response: string, status: number, headers: any): any => {
       const res: any = JSON.parse(response);
@@ -37,6 +41,17 @@ export class AddProductComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.accService.getLoggedIn().subscribe(loggedIn => {
+      this.loggedIn = loggedIn;
+    });
+    this.accService.getSeller().subscribe(seller => {
+      this.currSeller = seller;
+    });
+    if (!this.loggedIn) {
+      this.router.navigate(['401']);
+    } else if (!this.currSeller) {
+      this.router.navigate(['403']);
+    }
   }
 
   goBack(): void {
