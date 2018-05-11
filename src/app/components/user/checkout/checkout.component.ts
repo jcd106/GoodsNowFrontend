@@ -8,6 +8,7 @@ import { OrderItem } from '../../../models/orderItem';
 import { CheckoutService } from '../../../services/checkout.service';
 import { AccountsService } from '../../../services/accounts.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 declare let paypal: any;
 
@@ -31,6 +32,15 @@ export class CheckoutComponent implements OnInit {
   failed: Boolean = false;
   customer: boolean = (localStorage.getItem('customer') !== null) ? true : false;
   loggedIn: boolean = (localStorage.getItem('accType') !== null) ? true : false;
+
+  streetAddress = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  city = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  state =  new FormControl('', [Validators.required, Validators.minLength(3)]);
+  zipCode =  new FormControl('', [Validators.required, Validators.minLength(3)]);
+
+  myGroup = new FormGroup({
+    firstName: new FormControl(),
+ });
 
   // PayPal Express Checkout stuff
   paypalConfig = {
@@ -74,6 +84,7 @@ export class CheckoutComponent implements OnInit {
     }
   };
   // End of PayPal stuff
+
 
   constructor(private cartService: CartService, private checkoutService: CheckoutService,
     private accService: AccountsService, private router: Router) { }
@@ -129,7 +140,20 @@ export class CheckoutComponent implements OnInit {
     this.step2Active = false;
   }
 
+  isAddressValid() {
+    if (!this.streetAddress.valid) {return false; }
+    if (!this.city.valid) {return false; }
+    if (!this.state.valid) {return false; }
+    if (!this.zipCode.valid) {return false; }
+    return true;
+  }
+
   addShipping() {
+    this.order.address = this.streetAddress.value;
+    this.order.city = this.city.value;
+    this.order.state = this.state.value;
+    this.order.zipcode = this.zipCode.value;
+    console.log(this.order);
     this.disabled2 = false;
     this.step1Active = false;
     this.step2Active = true;

@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatStepperModule } from '@angular/material/stepper';
 import { CovalentStepsModule  } from '@covalent/core/steps';
 
 // Routing
@@ -98,7 +99,9 @@ import { ForbiddenComponent } from './components/error/forbidden/forbidden.compo
     MatCardModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    MatStepperModule
+
   ],
   providers: [
     ProductsService,
