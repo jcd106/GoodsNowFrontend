@@ -6,6 +6,9 @@ import { Account } from '../models/account';
 import { Seller } from '../models/seller';
 import { Customer } from '../models/customer';
 import { Admin } from '../models/admin';
+import { Order } from '../models/order';
+import { Item } from '../models/item';
+import { OrderItem } from '../models/orderItem';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({
@@ -47,12 +50,28 @@ export class AccountsService {
     return this.http.put<Customer>(environment.backEndApiUrl + 'customers', JSON.stringify(updatedCustomer), HTTP_OPTIONS);
   }
 
+  public customerGetOrderHistory(customer: Customer) {
+    return this.http.get<JSON>(environment.backEndApiUrl + 'orders/' + customer.customerId, HTTP_OPTIONS);
+  }
+
+  public customerGetOrderItems(orderId: Number) {
+    return this.http.get<Array<OrderItem>>(environment.backEndApiUrl + 'orderitems/orderId=' + orderId, HTTP_OPTIONS);
+  }
+
   public sellerSignUp(Account: Account, Seller: Seller) {
     return this.http.post<Seller>(environment.backEndApiUrl + 'register/seller', JSON.stringify({Account, Seller}), HTTP_OPTIONS);
   }
 
   public sellerUpdate(Seller: Seller) {
     return this.http.put<Seller>(environment.backEndApiUrl + 'sellers', JSON.stringify(Seller), HTTP_OPTIONS);
+  }
+
+  public sellerGetOrders(seller: Seller) {
+    return this.http.get<Array<OrderItem>>(environment.backEndApiUrl + 'orderitems/sellerId=' + seller.sellerId, HTTP_OPTIONS);
+  }
+
+  public sellerUpdateOrder(order: OrderItem) {
+    return this.http.put<OrderItem>(environment.backEndApiUrl + 'orderitems', order, HTTP_OPTIONS);
   }
 
   public getLoggedIn() {

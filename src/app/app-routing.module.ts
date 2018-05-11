@@ -33,7 +33,7 @@ export const routes: Routes = [
   { path: 'view/order/:id', component: ViewOrderComponent },
   { path: 'view/store/orders', component: ViewStoreOrdersComponent},
   { path: 'view/store/order', redirectTo: '404', pathMatch: 'full'},
-  { path: 'view/store/order/:id', component: FullfillOrderComponent},
+  { path: 'view/seller/order', component: FullfillOrderComponent},
   { path: 'products', component: ManageProductsComponent},
   { path: 'products/add', component: AddProductComponent},
   { path: 'browse', component: BrowseProductsComponent},

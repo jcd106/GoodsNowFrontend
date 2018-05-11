@@ -1,3 +1,28 @@
-<p>
-  order-history works!
-</p>
+<mat-card>
+  <mat-card style="min-height: 400px">
+    <h3 *ngIf="orders == null">You have no orders. Go buy something </h3>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let order of orders; let i = index">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Order number
+          </mat-panel-title>
+          <mat-panel-description>
+            {{ order.orderId }}
+          </mat-panel-description>
+          <p style="padding-right:5em;">Order submited on {{ order.submitted | date }} at {{ order.submitted | date : "shortTime" }} </p>
+        </mat-expansion-panel-header>
+        <p>Shipping Address {{ order.address }} {{ order.city }}, {{ order.state }} {{ order.zipcode }} </p>
+        <div *ngFor="let orderItem of orderItems[i]; let j = index">
+        <mat-card class="item"  [ngStyle]="{'background-color':orderItem.resolved != null ? 'rgba(40, 150, 26, 0.452' : 'rgba(255, 243, 74, 0.493)' }">
+          <p>{{ orderItem.orderItemId.item.itemName }} for {{ orderItem.quantity*orderItem.orderItemId.item.price | currency }} </p>
+          <p>{{ orderItem.orderItemId.item.description }}</p>
+          <p>quantity is {{ orderItem.quantity }}</p>
+          <p *ngIf="orderItem.resolved != null">Shipped: {{ orderItem.resolved | date }} at {{ orderItem.resolved | date: "shortTime" }}</p>
+          <p *ngIf="orderItem.resolved == null">Not yet Shipped</p>
+        </mat-card>
+      </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card>
+</mat-card>

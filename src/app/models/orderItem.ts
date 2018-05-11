@@ -1,4 +1,4 @@
-import { OrderItemId } from "./orderItemId";
+import { OrderItemId } from './orderItemId';
 
 export class OrderItem {
     orderItemId: OrderItemId;
