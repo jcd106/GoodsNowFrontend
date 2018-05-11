@@ -1,4 +1,4 @@
-import { Account } from '../models/Account';
+import { Account } from '../models/account';
 
 export class Admin {
     adminId: number;

@@ -1,5 +1,5 @@
 <mat-horizontal-stepper linear #stepper>
-    <mat-step [stepControl]="firstFormGroup">
+    <mat-step>
     <form [formGroup]="myGroup" ngNativeValidate (ngSubmit)="addShipping()">
       <mat-form-field>
         <input matInput class="form-container" id="address" name="order.address" [formControl]="streetAddress" placeholder="Address"

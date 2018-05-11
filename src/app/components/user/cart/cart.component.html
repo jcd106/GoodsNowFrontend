@@ -38,7 +38,7 @@
         <br>
         <strong>Shipping Cost: </strong>{{0 | currency}}
         <hr>
-        <strong>Total Price: </strong>{{totalPrice + 0 | currency}}
+        <strong>Total Price: </strong>{{ totalPrice  | currency}}
         <br>
         <button type="submit" *ngIf="cartItem.length>0" class="btn btn-primary" routerLink="/checkout">Checkout</button>
       </mat-card>

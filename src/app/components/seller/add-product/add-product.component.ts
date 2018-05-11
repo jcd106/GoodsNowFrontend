@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import { Router } from '@angular/router';
 import { ProductsService } from '../../../services/products.service';
-import { Item } from '../../../models/Item';
+import { Item } from '../../../models/item';
 import { Seller } from '../../../models/seller';
 import { AccountsService } from '../../../services/accounts.service';
 

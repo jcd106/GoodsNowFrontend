@@ -1,5 +1,5 @@
-import { Account } from '../models/Account';
-import { Item } from '../models/Item';
+import { Account } from '../models/account';
+import { Item } from '../models/item';
 
 export class Seller {
     sellerId: number;

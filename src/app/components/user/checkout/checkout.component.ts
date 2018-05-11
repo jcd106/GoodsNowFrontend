@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../../services/cart.service';
-import { StepState } from '@covalent/core/steps';
 import { Order } from '../../../models/order';
 import { OrderItemId } from '../../../models/orderItemId';
 import { CartItem } from '../../../models/cartItem';
@@ -23,7 +22,6 @@ export class CheckoutComponent implements OnInit {
   totalPrice: Number = 0;
   step1Active: Boolean = true;
   step2Active: Boolean = false;
-  stateStep2: StepState = StepState.None;
   disabled1: Boolean = false;
   disabled2: Boolean = true;
   order: Order = new Order();
@@ -68,7 +66,6 @@ export class CheckoutComponent implements OnInit {
         this.checkoutService.checkout(this.order).subscribe(order => {
           this.failed = false;
           this.succeeded = true;
-          this.stateStep2 = StepState.Complete;
           this.disabled1 = true;
           this.disabled2 = true;
           this.cartService.updateCartCount();

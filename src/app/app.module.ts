@@ -16,7 +16,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
-import { CovalentStepsModule  } from '@covalent/core/steps';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -87,7 +86,6 @@ import { ForbiddenComponent } from './components/error/forbidden/forbidden.compo
     MatInputModule,
     MatRadioModule,
     Ng2CloudinaryModule,
-    CovalentStepsModule,
     FileUploadModule,
     ReactiveFormsModule,
     MatSelectModule,
