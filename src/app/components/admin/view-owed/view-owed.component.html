@@ -1,3 +1,25 @@
-<p>
-  view-owed works!
-</p>
+<mat-card>
+  <h1>Sellers you need to pay</h1>
+  <mat-card>
+    <ng-container *ngFor="let seller of sellers">
+      <ng-container *ngIf="seller.money>0">
+        <form ngNativeValidate (ngSubmit)="payOff(seller)">
+          <div class="row">
+            <div class="seller-card col col-sm-2">
+              <div class="seller-contents">
+                <h6>
+                  <strong>{{seller.name}}</strong>
+                </h6>
+                <em>owed: </em>{{seller.money | currency}}
+              </div>
+            </div>
+            <div class="col col-sm-2">
+              <br>
+              <button type="submit" class="btn btn-primary">Pay Seller</button>
+            </div>
+          </div>
+        </form>
+      </ng-container>
+    </ng-container>
+  </mat-card>
+</mat-card>

@@ -44,6 +44,10 @@ export class CartService {
     }
   }
 
+  updateCartItem(item: CartItem) {
+    return this.http.put<CartItem>(environment.backEndApiUrl + 'cartitems/update', JSON.stringify(item), HTTP_OPTIONS);
+  }
+
   deleteCartItem(item: CartItem) {
     return this.http.request<CartItem>('DELETE', environment.backEndApiUrl + 'cartitems', {
       headers: new HttpHeaders({

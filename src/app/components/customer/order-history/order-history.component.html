@@ -14,14 +14,21 @@
         </mat-expansion-panel-header>
         <p>Shipping Address {{ order.address }} {{ order.city }}, {{ order.state }} {{ order.zipcode }} </p>
         <div *ngFor="let orderItem of orderItems[i]; let j = index">
-        <mat-card class="item"  [ngStyle]="{'background-color':orderItem.resolved != null ? 'rgba(40, 150, 26, 0.452' : 'rgba(255, 243, 74, 0.493)' }">
-          <p>{{ orderItem.orderItemId.item.itemName }} for {{ orderItem.quantity*orderItem.orderItemId.item.price | currency }} </p>
-          <p>{{ orderItem.orderItemId.item.description }}</p>
-          <p>quantity is {{ orderItem.quantity }}</p>
-          <p *ngIf="orderItem.resolved != null">Shipped: {{ orderItem.resolved | date }} at {{ orderItem.resolved | date: "shortTime" }}</p>
-          <p *ngIf="orderItem.resolved == null">Not yet Shipped</p>
-        </mat-card>
-      </div>
+          <mat-card class="item" [ngStyle]="{'background-color':orderItem.resolved != null ? 'rgba(40, 150, 26, 0.452' : 'rgba(255, 243, 74, 0.493)' }">
+            <div class="row">
+              <div class="col">
+                <p>{{ orderItem.orderItemId.item.itemName }} for {{ orderItem.quantity*orderItem.orderItemId.item.price | currency }} </p>
+                <p>{{ orderItem.orderItemId.item.description }}</p>
+                <p>Submitted: {{ order.submitted | date }} at {{ order.submitted | date:"shortTime" }}</p>
+                <p *ngIf="orderItem.resolved != null">Shipped: {{ orderItem.resolved | date }} at {{ orderItem.resolved | date: "shortTime" }}</p>
+                <p *ngIf="orderItem.resolved == null">Not yet Shipped</p>
+              </div>
+              <div class="col">
+                <cl-image class="preview-image" public-id="{{ orderItem.orderItemId.item.image }}" cloud-name="goodsnow" width="150" height="120" crop="fill" gravity="center"></cl-image>
+              </div>
+            </div>
+          </mat-card>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
   </mat-card>

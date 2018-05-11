@@ -12,10 +12,17 @@
             <p style="padding-right:5em;">Order submited on {{ order.orderItemId.order.submitted | date }} at {{ order.orderItemId.order.submitted | date: "shortTime" }}</p>
           </mat-expansion-panel-header>
           <mat-card >
-          <p>Shipping Address: <b>{{ order.orderItemId.order.address }} {{ order.orderItemId.order.city }}, {{ order.orderItemId.order.state }} {{ order.orderItemId.order.zipcode }}</b> </p>
+            <div class="row">
+            <div class="col">
+            <p>Shipping Address: <b>{{ order.orderItemId.order.address }} {{ order.orderItemId.order.city }}, {{ order.orderItemId.order.state }} {{ order.orderItemId.order.zipcode }}</b> </p>
           <p>Customer Name:<b> {{ order.orderItemId.order.customer.firstName }} {{ order.orderItemId.order.customer.lastName }} </b></p>
           <p><b>{{ order.orderItemId.item.itemName }} x {{ order.quantity }}</b></p>
           <p>Total price: <b>{{ order.orderItemId.item.price | currency }}</b></p>
+        </div>
+          <div class="col">
+          <cl-image class="preview-image" public-id="{{ order.orderItemId.item.image }}" cloud-name="goodsnow"  width="150" height="120" crop="fill" gravity="center"></cl-image>
+        </div>
+      </div>
           <button *ngIf="order.resolved == null" class="btn btn-success" mat-button (click)="fuffill(order)">Fullfill</button>
         </mat-card>
         </mat-expansion-panel>

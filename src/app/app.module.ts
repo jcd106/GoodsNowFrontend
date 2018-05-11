@@ -15,7 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { CovalentStepsModule  } from '@covalent/core/steps';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -43,6 +43,10 @@ import { AddProductComponent } from './components/seller/add-product/add-product
 import { ProductsService } from './services/products.service';
 import { AccountsService } from './services/accounts.service';
 import { CartService } from './services/cart.service';
+import { CheckoutService } from './services/checkout.service';
+import { AdminService } from './services/admin.service';
+import { UnauthorizedComponent } from './components/error/unauthorized/unauthorized.component';
+import { ForbiddenComponent } from './components/error/forbidden/forbidden.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +66,9 @@ import { CartService } from './services/cart.service';
     ViewStoreOrdersComponent,
     FullfillOrderComponent,
     OrderHistoryComponent,
-    ViewOrderComponent
+    ViewOrderComponent,
+    UnauthorizedComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +86,7 @@ import { CartService } from './services/cart.service';
     MatInputModule,
     MatRadioModule,
     Ng2CloudinaryModule,
-
+    CovalentStepsModule,
     FileUploadModule,
     ReactiveFormsModule,
     MatSelectModule,
@@ -97,7 +103,9 @@ import { CartService } from './services/cart.service';
   providers: [
     ProductsService,
     AccountsService,
-    CartService
+    CartService,
+    CheckoutService,
+    AdminService
   ],
   bootstrap: [AppComponent]
 })

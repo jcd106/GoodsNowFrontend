@@ -1,34 +1,47 @@
-<h1>Shopping Cart</h1>
-<hr>
-<div class="row">
-  <div class="col col-sm-7">
-    <ng-container *ngFor="let cartItem of cartItem">
-      <form ngNativeValidate (ngSubmit)="update(cartItem)">
-        <div class="item-card row">
-          <cl-image class="preview-image" public-id="{{cartItem.cartItemId.item.image}}" cloud-name="goodsnow"  width="150" height="125" crop="fill" gravity="center"></cl-image>
-          <div class="col col-sm-8">
-            <br>
-            <h6><strong>{{cartItem.cartItemId.item.itemName}}</strong></h6>
-            <hr>
-            {{cartItem.cartItemId.item.price | currency}}
-            <span class="float-right"><em>quantity</em><input class="form-control quantity" type="text" placeholder="{{cartItem.quantity}}"></span>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Update Cart</button>
-        <a href="javascript:void(0)" (click)="deleteCartItem(cartItem)"><mat-icon class="icon float-right" style="font-size:1.5em;color:red;">highlight_off</mat-icon></a> 
-      </form>
-    </ng-container>
+<mat-card>
+  <h1>Shopping Cart</h1>
+  <hr>
+  <div class="row">
+    <div class="col col-sm-7">
+      <mat-card>
+        <ng-container *ngFor="let cartItem of cartItem">
+          <form ngNativeValidate (ngSubmit)="updateCartItem(cartItem)">
+            <div class="item-card row">
+              <cl-image class="preview-image" public-id="{{cartItem.cartItemId.item.image}}" cloud-name="goodsnow" width="150" height="125"
+                crop="fill" gravity="center"></cl-image>
+              <div class="col col-sm-8">
+                <br>
+                <h6>
+                  <strong>{{cartItem.cartItemId.item.itemName}}</strong>
+                </h6>
+                <hr> {{cartItem.cartItemId.item.price | currency}}
+                <span class="float-right">
+                  <em>quantity</em>
+                  <input class="form-control" type="text" name="cartItem.quantity" [(ngModel)]="cartItem.quantity" placeholder="{{cartItem.quantity}}">
+                </span>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Cart</button>
+            <a href="javascript:void(0)" (click)="deleteCartItem(cartItem)">
+              <mat-icon class="icon float-right" style="font-size:1.5em;color:red;">highlight_off</mat-icon>
+            </a>
+          </form>
+          <br>
+        </ng-container>
+      </mat-card>
+    </div>
+    <div class="col col-sm-5">
+      <mat-card>
+        <strong>Total in Cart: </strong>{{totalPrice | currency}}
+        <br>
+        <em>(You qualify for free shipping!)</em>
+        <br>
+        <strong>Shipping Cost: </strong>{{0 | currency}}
+        <hr>
+        <strong>Total Price: </strong>{{totalPrice + 0 | currency}}
+        <br>
+        <button type="submit" *ngIf="cartItem.length>0" class="btn btn-primary" routerLink="/checkout">Checkout</button>
+      </mat-card>
+    </div>
   </div>
-  <div class="col col-sm-5">
-    <strong>Total in Cart: </strong>{{totalPrice | currency}}
-    <br>
-    <em>(You qualify for free shipping!)</em>
-    <br>
-    <strong>Shipping Cost: </strong>{{0 | currency}}
-    <hr>
-    <strong>Total Price: </strong>{{totalPrice + 0 | currency}}
-    <br>
-    <h2 *ngIf="paypalLoad">Paypal button is loading</h2>
-    <div id="paypal-checkout-btn"></div>
-  </div>
-</div>
+</mat-card>
