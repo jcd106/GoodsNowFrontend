@@ -102,6 +102,7 @@ export class CheckoutComponent implements OnInit {
             let totalPrice = this.totalPrice.valueOf();
             totalPrice += cartItem.cartItemId.item.price * cartItem.quantity;
             this.totalPrice = totalPrice;
+            this.totalPrice = Number(this.totalPrice.toFixed(2)).valueOf();
           }
         });
       }
